@@ -1,7 +1,9 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.AspNet.Identity.EntityFramework;
+using ST.Models.Entities;
 
 namespace ST.Models.IdentityModels
 {
@@ -20,5 +22,7 @@ namespace ST.Models.IdentityModels
         public string Surname { get; set; }
         [Column(TypeName = "smalldatetime")]
         public DateTime RegisterDate { get; set; } = DateTime.Now;
+
+        public virtual List<Firma> Firmalar{ get; set; }= new List<Firma>();
     }
 }
