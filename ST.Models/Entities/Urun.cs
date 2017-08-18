@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace ST.Models.Entities
@@ -18,5 +19,6 @@ namespace ST.Models.Entities
 
         [ForeignKey("UrunKategoriId")]
         public virtual UrunKategori UrunKategori { get; set; }
+        public virtual List<FirmaUrun> FirmaUrunler { get; set; } = new List<FirmaUrun>();
     }
 }

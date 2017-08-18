@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using ST.Models.IdentityModels;
@@ -34,6 +35,8 @@ namespace ST.Models.Entities
         //Navigation Prop.
         [ForeignKey("KullaniciId")]
         public virtual ApplicationUser Kullanicisi { get; set; }
+
+        public virtual List<FirmaUrun> FirmaUrunler { get; set; }= new List<FirmaUrun>();
 
     }
 }

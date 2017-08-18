@@ -23,6 +23,8 @@ namespace ST.Models.IdentityModels
         [Column(TypeName = "smalldatetime")]
         public DateTime RegisterDate { get; set; } = DateTime.Now;
 
-        public virtual List<Firma> Firmalar{ get; set; }= new List<Firma>();
+        public virtual List<Firma> Firmalar { get; set; } = new List<Firma>();
+        public virtual List<Adres> Adresler { get; set; } = new List<Adres>();
+        public virtual List<Siparis> Siparisler { get; set; } = new List<Siparis>();
     }
 }
