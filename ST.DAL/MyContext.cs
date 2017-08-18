@@ -19,10 +19,17 @@ namespace ST.DAL
         public virtual DbSet<FirmaUrun> FirmaUrunler { get; set; }
         public virtual DbSet<OdemeTipi> OdemeTipleri { get; set; }
         public virtual DbSet<Siparis> Siparisler { get; set; }
+        public virtual DbSet<SiparisDetay> SiparisDetaylar { get; set; }
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
+
+            //Fluent API
             modelBuilder.Entity<FirmaUrun>()
+                .Property(x => x.UrunFiyat)
+                .HasPrecision(7, 2);
+
+            modelBuilder.Entity<SiparisDetay>()
                 .Property(x => x.UrunFiyat)
                 .HasPrecision(7, 2);
         }
