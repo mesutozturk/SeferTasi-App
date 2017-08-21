@@ -16,7 +16,6 @@ namespace ST.UI.MVC.App_Start
                 AuthenticationType = "ApplicationCookie",
                 LoginPath = new PathString("/Account/Login")// daha sonra account login path'i verilecek
             });
-
         }
     }
 }
