@@ -1540,6 +1540,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.cs" />
     <Compile Include="Areas\Yonetim\YonetimAreaRegistration.cs" />
+    <Compile Include="Controllers\HesapController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -1614,8 +1615,8 @@
     <Folder Include="App_Data\" />
     <Folder Include="Areas\Yonetim\Controllers\" />
     <Folder Include="Areas\Yonetim\Models\" />
-    <Folder Include="Controllers\" />
     <Folder Include="Models\" />
+    <Folder Include="Views\Hesap\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\ST.BLL\ST.BLL.csproj">
