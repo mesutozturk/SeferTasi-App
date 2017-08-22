@@ -66,7 +66,7 @@ namespace ST.UI.MVC.Controllers
                         userManager.AddToRole(user.Id, "Musteri");
                 }
 
-                return RedirectToAction("Index", "Ana");
+                return RedirectToAction("Giris", "Hesap");
             }
             else
             {
@@ -115,11 +115,11 @@ namespace ST.UI.MVC.Controllers
                 login(user);
             }
 
-            async void login(ApplicationUser loginuser)
+            void login(ApplicationUser loginuser)
             {
                 var authManager = HttpContext.GetOwinContext().Authentication;
                 var userIdentity =
-                    await userManager.CreateIdentityAsync(loginuser, DefaultAuthenticationTypes.ApplicationCookie);
+                    userManager.CreateIdentity(loginuser, DefaultAuthenticationTypes.ApplicationCookie);
 
                 authManager.SignIn(new AuthenticationProperties()
                 {

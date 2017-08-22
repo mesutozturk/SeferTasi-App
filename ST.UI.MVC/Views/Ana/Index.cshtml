@@ -1,0 +1,9 @@
+﻿
+@{
+    ViewBag.Title = "Ana Sayfa";
+    Layout = "~/Views/_LayoutPage.cshtml";
+}
+
+<h2>Index</h2>
+
+@HttpContext.Current.User.Identity.GetUserName()
