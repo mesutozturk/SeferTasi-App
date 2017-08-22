@@ -31,6 +31,12 @@
                                         Firmam
                                     </a>
                                 }
+                                else if (HttpContext.Current.User.IsInRole("Admin"))
+                                {
+                                    <a class="dropdown-item" href="contact.html">
+                                        Yönetici Paneli
+                                    </a>
+                                }
                                 
 
                                 <div class="dropdown-divider"></div>
