@@ -45,7 +45,7 @@
                         </form>
                     </div>
                     <div class="col-md-6" ng-if="duzenlenecek!=null">
-                        <form ng-submit="duzenle()" class="form-horizontal">
+                        <form ng-submit="guncelle()" class="form-horizontal">
                             <div class="form-group">
                                 <label class="col-sm-4 control-label">Kategori Adı</label>
                                 <div class="col-sm-8">
@@ -83,7 +83,7 @@
                             <td>{{item.Aciklama}}</td>
                             <td>
                                 <input type="button" class="btn btn-block btn-warning" value="Düzenle" ng-click="duzenle(item)" />
-                                <input type="button" class="btn btn-block btn-danger" value="Sil"/>
+                                <input type="button" class="btn btn-block btn-danger" value="Sil" ng-click="sil(item.Id)"/>
                             </td>
                         </tr>
                         </tbody>
