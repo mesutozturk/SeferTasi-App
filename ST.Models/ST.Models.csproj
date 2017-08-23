@@ -93,6 +93,7 @@
     <Compile Include="ViewModels\LoginViewModel.cs" />
     <Compile Include="ViewModels\ProfileViewModel.cs" />
     <Compile Include="ViewModels\RegisterViewModel.cs" />
+    <Compile Include="ViewModels\UrunKategoriViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

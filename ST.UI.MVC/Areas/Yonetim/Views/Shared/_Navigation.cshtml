@@ -1,4 +1,5 @@
-﻿<nav class="navbar-default navbar-static-side" role="navigation">
+﻿@using Microsoft.AspNet.Identity
+<nav class="navbar-default navbar-static-side" role="navigation">
     <div class="sidebar-collapse">
         <ul class="nav" id="side-menu">
             <li class="nav-header">
@@ -9,20 +10,18 @@
                     <a data-toggle="dropdown" class="dropdown-toggle" href="#">
                         <span class="clear">
                             <span class="block m-t-xs">
-                                <strong class="font-bold">David Williams</strong>
-                            </span> <span class="text-muted text-xs block">Art Director <b class="caret"></b></span>
+                                <strong class="font-bold">@HttpContext.Current.User.Identity.GetUserName()</strong>
+                            </span> <span class="text-muted text-xs block">Site Yöneticisi <b class="caret"></b></span>
                         </span>
                     </a>
                     <ul class="dropdown-menu animated fadeInRight m-t-xs">
-                        <li><a href="@Url.Action("Profile", "AppViews")">Profile</a></li>
-                        <li><a href="@Url.Action("Contacts", "AppViews")">Contacts</a></li>
-                        <li><a href="@Url.Action("Inbox", "Mailbox")">Mailbox</a></li>
+                        <li><a href="@Url.Action("Profilim", "Hesap")">Profil</a></li>
                         <li class="divider"></li>
-                        <li><a href="@Url.Action("Login", "Pages")">Logout</a></li>
+                        <li><a href="@Url.Action("Cikis", "Hesap")">Çıkış Yap</a></li>
                     </ul>
                 </div>
                 <div class="logo-element">
-                    IN+
+                    ST
                 </div>
             </li>
             <li class="@Html.IsSelected(controller: "Dashboards")">
@@ -35,8 +34,8 @@
                     <li class="@Html.IsSelected(action: "Dashboard_5")"><a href="@Url.Action("Dashboard_5", "Dashboards")">Dashboard v.5</a></li>
                 </ul>
             </li>
-            <li class="@Html.IsSelected(controller: "Layouts")">
-                <a href="@Url.Action("Index", "Layouts")"><i class="fa fa-diamond"></i> <span class="nav-label" data-i18n="nav.layouts">Layouts</span> <span class="label label-primary pull-right">NEW</span></a>
+            <li class="@Html.IsSelected(controller: "UrunKategori")">
+                <a href="@Url.Action("Index", "UrunKategori")"><i class="fa fa-diamond"></i> <span class="nav-label" data-i18n="nav.layouts">Ürün Kategorileri</span> <span class="label label-primary pull-right">NEW</span></a>
             </li>
             <li class="@Html.IsSelected(controller: "Graphs")">
                 <a href="#"><i class="fa fa-bar-chart-o"></i> <span class="nav-label" data-i18n="nav.graphs">Graphs</span><span class="fa arrow"></span></a>

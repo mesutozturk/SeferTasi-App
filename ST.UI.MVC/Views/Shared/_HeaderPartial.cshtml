@@ -33,11 +33,11 @@
                                 }
                                 else if (HttpContext.Current.User.IsInRole("Admin"))
                                 {
-                                    <a class="dropdown-item" href="contact.html">
-                                        Yönetici Paneli
+                                    <a class="dropdown-item" href="@Url.Action("Index", "Ana", new { Area = "Yonetim" })">
+                                    Yönetici Paneli
                                     </a>
                                 }
-                                
+
 
                                 <div class="dropdown-divider"></div>
                                 <a class="dropdown-item" href="@Url.Action("Cikis","Hesap")">Çıkış Yap</a>
@@ -68,4 +68,3 @@
     </nav>
     <!-- /.navbar -->
 </header>
-

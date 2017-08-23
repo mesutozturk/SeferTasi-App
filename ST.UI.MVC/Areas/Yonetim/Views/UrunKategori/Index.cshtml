@@ -1,0 +1,57 @@
+﻿
+@{
+    ViewBag.Title = "Ürün Kategori Yönetimi";
+    Layout = "~/Areas/Yonetim/Views/Shared/_LayoutAdmin.cshtml";
+}
+<div ng-app="admin" ng-controller="UrunKategoriCtrl" ng-cloak>
+    <div class="row wrapper border-bottom white-bg page-heading">
+        <div class="col-sm-4">
+            <h2>Ürün Kategori Yönetimi</h2>
+            <ol class="breadcrumb">
+                <li>
+                    <a href="@Url.Action("Index","Ana",new{Area="Yonetim"})">Ana Sayfa</a>
+                </li>
+                <li class="active">
+                    <strong>Ürün Kategori Yönetimi</strong>
+                </li>
+            </ol>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="wrapper wrapper-content">
+                
+                
+                <div class="row">
+                    <div class="col-md-6">
+                        <form ng-submit="ekle()" class="form-horizontal">
+                            <div class="form-group">
+                                <label class="col-sm-4 control-label">Kategori Adı</label>
+                                <div class="col-sm-8">
+                                    <input type="text" class="form-control" ng-model="kategori.KategoriAdi" />
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-4 control-label">Açıklama</label>
+                                <div class="col-sm-8">
+                                    <input type="text" class="form-control" ng-model="kategori.Aciklama" />
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-sm-offset-4 col-sm-8">
+                                    <button type="submit" class="btn btn-success btn-block">Kategoriyi Kaydet</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <div class="row">
+                    <ol>
+                        <li ng-repeat="item in kategoriler">{{item}}</li>
+                    </ol>
+                </div>
+            
+            </div>
+        </div>
+    </div>
+</div>
