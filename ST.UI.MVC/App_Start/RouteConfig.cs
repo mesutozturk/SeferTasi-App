@@ -8,12 +8,13 @@ namespace ST.UI.MVC
         public static void RegisterRoutes(RouteCollection routes)
         {
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
-
             routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",
-                defaults: new { controller = "Ana", action = "Index", id = UrlParameter.Optional }
+                defaults: new { controller = "Ana", action = "Index", id = UrlParameter.Optional },
+                namespaces: new[] { "ST.UI.MVC.Controllers" }
             );
+
         }
     }
 }

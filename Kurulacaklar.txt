@@ -6,6 +6,7 @@ install-package Newtonsoft.Json
 install-package Microsoft.aspnet.Identity.Owin
 
 --sadece UI--
+Microsoft.AspNet.Web.Optimization
 install-package Microsoft.Owin
 install-package Microsoft.Owin.Security
 install-package Microsoft.Owin.Security.Cookies
