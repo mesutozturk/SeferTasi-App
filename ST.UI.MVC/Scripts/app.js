@@ -30,18 +30,24 @@ app.factory("api", function ($http) {
 app.controller("UrunKategoriCtrl",
     function ($scope, api) {
         $scope.kategoriler = [];
+        $scope.duzenlenecek = null;
         function init() {
-            api.urunkategorilerigetir(function(data) {
+            api.urunkategorilerigetir(function (data) {
                 $scope.kategoriler = data;
             });
         }
-        $scope.ekle=function() {
+        $scope.ekle = function () {
             api.urunkategoriekle($scope.kategori,
                 function (data) {
-                    $scope.kategoriler = null;
-                    console.log(data);
+                    $scope.kategoriler.KategoriAdi = "";
+                    $scope.kategoriler.Aciklama = "";
                     init();
+                    console.log(data);
+                    alert(data.message);
                 });
+        }
+        $scope.duzenle=function(kategori) {
+            $scope.duzenlenecek = kategori;
         }
         init();
     });

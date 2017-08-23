@@ -20,10 +20,10 @@
     <div class="row">
         <div class="col-lg-12">
             <div class="wrapper wrapper-content">
-                
-                
+
+
                 <div class="row">
-                    <div class="col-md-6">
+                    <div class="col-md-6" ng-if="duzenlenecek==null">
                         <form ng-submit="ekle()" class="form-horizontal">
                             <div class="form-group">
                                 <label class="col-sm-4 control-label">Kategori Adı</label>
@@ -44,13 +44,52 @@
                             </div>
                         </form>
                     </div>
+                    <div class="col-md-6" ng-if="duzenlenecek!=null">
+                        <form ng-submit="duzenle()" class="form-horizontal">
+                            <div class="form-group">
+                                <label class="col-sm-4 control-label">Kategori Adı</label>
+                                <div class="col-sm-8">
+                                    <input type="text" class="form-control" ng-model="duzenlenecek.KategoriAdi" />
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-4 control-label">Açıklama</label>
+                                <div class="col-sm-8">
+                                    <input type="text" class="form-control" ng-model="duzenlenecek.Aciklama" />
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-sm-offset-4 col-sm-8">
+                                    <button type="submit" class="btn btn-success btn-block">Kategoriyi Güncelle</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
                 </div>
                 <div class="row">
-                    <ol>
-                        <li ng-repeat="item in kategoriler">{{item}}</li>
-                    </ol>
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Kategori Adı</th>
+                                <th>Açıklama</th>
+                                <th>Düzenle</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        <tr ng-repeat="(key,item) in kategoriler">
+                            <th scope="row">{{key+1}}</th>
+                            <td>{{item.KategoriAdi}}</td>
+                            <td>{{item.Aciklama}}</td>
+                            <td>
+                                <input type="button" class="btn btn-block btn-warning" value="Düzenle" ng-click="duzenle(item)" />
+                                <input type="button" class="btn btn-block btn-danger" value="Sil"/>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
                 </div>
-            
+
             </div>
         </div>
     </div>
