@@ -14,11 +14,11 @@
     {@RenderSection("Styles", required: false)}
      
      <!-- Add jQuery Style direct - used for jQGrid plugin -->
-     <link href="@Url.Content("~/Scripts/plugins/jquery-ui/jquery-ui.css")" rel="stylesheet" type="text/css" />
-
+     <link href="@Url.Content("~/Areas/Yonetim/Scripts/plugins/jquery-ui/jquery-ui.css")" rel="stylesheet" type="text/css" />
+  
      <!-- Primary Inspinia style -->     
-     @Styles.Render("~/Content/css")
-     @Styles.Render("~/font-awesome/css")
+     @Styles.Render("~/Areas/Yonetim/Content/css")
+     @Styles.Render("~/Areas/Yonetim/font-awesome/css")
 
      </head>
      <body>
@@ -51,13 +51,13 @@
      <!-- End wrapper-->
 
      <!-- Section for main scripts render -->
-     @Scripts.Render("~/bundles/jquery")
-     @Scripts.Render("~/bundles/bootstrap")
-     @Scripts.Render("~/plugins/slimScroll")
-     @Scripts.Render("~/bundles/inspinia")
+     @Scripts.Render("~/Areas/Yonetim/bundles/jquery")
+     @Scripts.Render("~/Areas/Yonetim/bundles/bootstrap")
+     @Scripts.Render("~/Areas/Yonetim/plugins/slimScroll")
+     @Scripts.Render("~/Areas/Yonetim/bundles/inspinia")
 
      <!-- Skin config script - only for demo purpose-->
-     @Scripts.Render("~/bundles/skinConfig")
+     @Scripts.Render("~/Areas/Yonetim/bundles/skinConfig")
 
      <!-- Handler for local scripts -->
      @RenderSection("scripts", required: false)

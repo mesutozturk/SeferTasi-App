@@ -135,5 +135,66 @@ namespace ST.UI.MVC.Controllers
             HttpContext.GetOwinContext().Authentication.SignOut();
             return RedirectToAction("Index", "Ana");
         }
+        [Authorize]
+        public async Task<ActionResult> Profilim()
+        {
+            string id= HttpContext.User.Identity.GetUserId();
+            var userManager = NewUserManager();
+            var user = await userManager.FindByIdAsync(id);
+            var model=new ProfileViewModel()
+            {
+                Username = user.UserName,
+                Email = user.Email,
+                Name = user.Name,
+                Surname = user.Surname,
+                Phone = user.PhoneNumber
+            };
+            return View(model);
+        }
+
+        [Authorize]
+        [ValidateAntiForgeryToken]
+        [HttpPost]
+        public async Task<ActionResult> Profilim(ProfileViewModel model)
+        {
+            if (!ModelState.IsValid)
+                return View(model);
+            var userStore = NewUserStore();
+            var userManager = new UserManager<ApplicationUser>(userStore);
+
+            var user = await userManager.FindByIdAsync(HttpContext.User.Identity.GetUserId());
+
+            user.Email = model.Email;
+            user.PhoneNumber = model.Phone;
+
+            await userStore.UpdateAsync(user);
+            await userStore.Context.SaveChangesAsync();
+
+            return RedirectToAction("Profilim");
+        }
+
+        [Authorize]
+        [ValidateAntiForgeryToken]
+        [HttpPost]
+        public async Task<ActionResult> SifreGuncelle(ProfileViewModel model)
+        {
+            if (!ModelState.IsValid)
+                return View("Profilim", model);
+            var userStore = NewUserStore();
+            var userManager = new UserManager<ApplicationUser>(userStore);
+            var user = userManager.FindById(HttpContext.User.Identity.GetUserId());
+
+            var checkUser = userManager.Find(user.UserName, model.OldPassword);
+            if (checkUser == null)
+            {
+                ModelState.AddModelError(string.Empty, "Mevcut şifreniz yanlış");
+                return View("Profilim", model);
+            }
+            await userStore.SetPasswordHashAsync(user, userManager.PasswordHasher.HashPassword(model.ConfirmPassword));
+            await userStore.UpdateAsync(user);
+            await userStore.Context.SaveChangesAsync();
+
+            return RedirectToAction("Cikis");
+        }
     }
 }

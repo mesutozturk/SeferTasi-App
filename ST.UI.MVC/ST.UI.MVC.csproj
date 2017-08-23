@@ -1598,6 +1598,7 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.cs" />
+    <Compile Include="Areas\Yonetim\Controllers\AnaController.cs" />
     <Compile Include="Areas\Yonetim\YonetimAreaRegistration.cs" />
     <Compile Include="Controllers\AnaController.cs" />
     <Compile Include="Controllers\HesapController.cs" />
@@ -1676,6 +1677,7 @@
     <Content Include="fonts\whateverittakesbold.ttf" />
     <Content Include="fonts\whateverittakesbold.woff" />
     <Content Include="fonts\whateverittakesbold.woff2" />
+    <Content Include="Areas\Yonetim\Views\Ana\Index.cshtml" />
     <None Include="packages.config" />
     <Content Include="Views\_LayoutPage.cshtml" />
     <Content Include="Views\Shared\_AppSectionPartial.cshtml" />
@@ -1684,6 +1686,7 @@
     <Content Include="Views\Hesap\Kayit.cshtml" />
     <Content Include="Views\Hesap\Giris.cshtml" />
     <Content Include="Views\Ana\Index.cshtml" />
+    <Content Include="Views\Hesap\Profilim.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -1693,7 +1696,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Areas\Yonetim\Controllers\" />
     <Folder Include="Areas\Yonetim\Models\" />
     <Folder Include="Models\" />
   </ItemGroup>

@@ -1,0 +1,90 @@
+﻿@model ProfileViewModel
+@{
+    ViewBag.Title = $"{Model.Username} - Profil Sayfam";
+    Layout = "~/Views/_LayoutPage.cshtml";
+    ViewBag.ContainerClass = "contact-page";
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-8">
+            <div class="widget">
+                <div class="widget-body">
+                    <span class="text text-danger">@Html.ValidationSummary()</span>
+                    @using (Html.BeginForm("Profilim", "Hesap", FormMethod.Post))
+                    {
+                        @Html.AntiForgeryToken()
+                        <div class="row">
+                            <div class="form-group col-sm-6">
+                                @Html.LabelFor(x => x.Name)
+                                @Html.TextBoxFor(x => x.Name, new { @class = "form-control", disabled = "disabled" })
+                            </div>
+                            <div class="form-group col-sm-6">
+                                @Html.LabelFor(x => x.Surname)
+                                @Html.TextBoxFor(x => x.Surname, new { @class = "form-control", disabled = "disabled" })
+                            </div>
+                            <div class="form-group col-sm-6">
+                                @Html.LabelFor(x => x.Email)
+                                @Html.TextBoxFor(x => x.Email, new { @class = "form-control", type = "email" })
+                                @Html.ValidationMessageFor(x => x.Email)
+                            </div>
+                            <div class="form-group col-sm-6">
+                                @Html.LabelFor(x => x.Username)
+                                @Html.TextBoxFor(x => x.Username, new { @class = "form-control", disabled = "disabled" })
+                                @Html.ValidationMessageFor(x => x.Username)
+                            </div>
+                            <div class="form-group col-sm-6">
+                                @Html.LabelFor(x => x.Phone)
+                                @Html.TextBoxFor(x => x.Phone, new { @class = "form-control", type = "tel" })
+                                @Html.ValidationMessageFor(x => x.Phone)
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-4">
+                                <p>
+                                    <input type="submit" class="btn theme-btn" value="Profili Güncelle" />
+                                </p>
+                            </div>
+                        </div>
+                    }
+
+                </div>
+                <!-- end: Widget -->
+            </div>
+            <!-- /REGISTER -->
+        </div>
+        <!-- WHY? -->
+        <div class="col-md-4">
+            <h4>Şifre İşlemleri</h4>
+            <span class="text text-danger">@Html.ValidationSummary()</span>
+            @using (Html.BeginForm("SifreGuncelle", "Hesap", FormMethod.Post))
+            {
+                @Html.AntiForgeryToken()
+                <div class="row">
+                    <div class="form-group col-sm-12">
+                        @Html.LabelFor(x => x.OldPassword)
+                        @Html.TextBoxFor(x => x.OldPassword, new { @class = "form-control", type = "password" })
+                        @Html.ValidationMessageFor(x => x.OldPassword)
+                    </div>
+                    <div class="form-group col-sm-12">
+                        @Html.LabelFor(x => x.Password)
+                        @Html.TextBoxFor(x => x.Password, new {@class = "form-control", type = "password"})
+                        @Html.ValidationMessageFor(x => x.Password)
+                    </div>
+                    <div class="form-group col-sm-12">
+                        @Html.LabelFor(x => x.ConfirmPassword)
+                        @Html.TextBoxFor(x => x.ConfirmPassword, new {@class = "form-control", type = "password"})
+                        @Html.ValidationMessageFor(x => x.ConfirmPassword)
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-4">
+                        <p>
+                            <input type="submit" class="btn theme-btn" value="Şifre Güncelle" />
+                        </p>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>
