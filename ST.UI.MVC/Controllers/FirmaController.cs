@@ -123,5 +123,82 @@ namespace ST.UI.MVC.Controllers
                 return View(model);
             }
         }
+
+        public ActionResult Duzenle()
+        {
+            var firma = new FirmaRepo().GetByUserId(HttpContext.User.Identity.GetUserId());
+            FirmaViewModel model = null;
+            if (firma != null)
+                model = new FirmaViewModel()
+                {
+                    Id = firma.Id,
+                    KullaniciId = firma.KullaniciId,
+                    Adres = firma.Adres,
+                    AktifMi = firma.AktifMi,
+                    EklenmeTarihi = firma.EklenmeTarihi,
+                    FirmaAdi = firma.FirmaAdi,
+                    FirmaKapakFotoPath = firma.FirmaKapakFotoPath,
+                    FirmaProfilFotoPath = firma.FirmaProfilFotoPath,
+                    MinimumSiparisTutari = firma.MinimumSiparisTutari,
+                    OrtalamaTeslimSuresi = firma.OrtalamaTeslimSuresi,
+                    Telefon = firma.Telefon,
+                    WebUrl = firma.WebUrl
+                };
+            else
+            {
+                return RedirectToAction("Index");
+            }
+            return View(model);
+        }
+        [HttpPost]
+        public ActionResult Duzenle(FirmaViewModel model)
+        {
+            if (!ModelState.IsValid)
+                return View(model);
+            try
+            {
+                var firma = new FirmaRepo().GetById(model.Id);
+                firma.MinimumSiparisTutari = model.MinimumSiparisTutari;
+                firma.OrtalamaTeslimSuresi = model.OrtalamaTeslimSuresi;
+                firma.Telefon = model.Telefon;
+                firma.Adres = model.Adres;
+                if (model.FirmaProfilFotoFile != null && model.FirmaProfilFotoFile.ContentLength > 0)
+                {
+                    var file = model.FirmaProfilFotoFile;
+                    string fileName = Path.GetFileNameWithoutExtension(file.FileName);
+                    string extName = Path.GetExtension(file.FileName);
+                    fileName = fileName?.Replace(" ", "");
+                    fileName += Guid.NewGuid().ToString().Replace("-", "");
+                    fileName = SiteSettings.UrlFormatConverter(fileName);
+                    var klasorYolu = Server.MapPath("~/Upload/" + firma.Id);
+                    var dosyaYolu = Server.MapPath("~/Upload/" + firma.Id + "/") + fileName + extName;
+                    if (!Directory.Exists(klasorYolu))
+                        Directory.CreateDirectory(klasorYolu);
+                    file.SaveAs(dosyaYolu);
+                    WebImage img = new WebImage(dosyaYolu);
+                    //240x140
+                    img.Resize(240, 140, false);
+                    img.AddTextWatermark("Sefer Tası - BAU", "Tomato", opacity: 75, fontSize: 12, fontFamily: "Verdana",
+                        horizontalAlign: "Left");
+                    img.Save(dosyaYolu);
+                    if (string.IsNullOrEmpty(firma.FirmaProfilFotoPath))
+                    {
+                        firma.FirmaProfilFotoPath = $"Upload/{firma.Id}/{fileName}{extName}";
+                    }
+                    else
+                    {
+                        System.IO.File.Delete(Server.MapPath(firma.FirmaProfilFotoPath));
+                        firma.FirmaProfilFotoPath = $"Upload/{firma.Id}/{fileName}{extName}";
+                    }
+                    //ff.FirmaProfilFotoPath = $"Upload/{firma.Id}/{fileName}{extName}";
+                    new FirmaRepo().Update();
+                }
+            }
+            catch(Exception ex)
+            {
+
+            }
+            return View();
+        }
     }
 }
