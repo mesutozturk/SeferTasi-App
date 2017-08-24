@@ -27,7 +27,7 @@
                                 </a>
                                 @if (HttpContext.Current.User.IsInRole("Firma"))
                                 {
-                                    <a class="dropdown-item" href="contact.html">
+                                    <a class="dropdown-item" href="@Url.Action("Index","Firma")">
                                         Firmam
                                     </a>
                                 }

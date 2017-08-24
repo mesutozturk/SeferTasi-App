@@ -1,0 +1,23 @@
+﻿@model FirmaViewModel
+@{
+    ViewBag.Title = "Firma Yönetim";
+    Layout = "~/Views/_LayoutPage.cshtml";
+}
+<div class="container">
+    <div class="row">
+        @if (Model == null)
+        {
+            <h1 class="text text-capitalize">
+                Firman Yok! Firma <a href="@Url.Action("Ekle", "Firma")" class="btn btn-success">Ekle</a>
+            </h1>
+        }
+        else
+        {
+            <div class="col-md-12">
+                <label class="label label-info">@Model.FirmaAdi</label>
+            </div>
+        }
+    </div>
+</div>
+
+

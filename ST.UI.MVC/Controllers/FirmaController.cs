@@ -85,11 +85,11 @@ namespace ST.UI.MVC.Controllers
                     WebImage img = new WebImage(dosyaYolu);
                     //240x140
                     img.Resize(240, 140, false);
-                    img.AddTextWatermark("Sefer Tası - BAU", "Tomato", opacity: 75, fontSize: 16, fontFamily: "Verdana",
+                    img.AddTextWatermark("Sefer Tası - BAU", "Tomato", opacity: 75, fontSize: 12, fontFamily: "Verdana",
                         horizontalAlign: "Left");
                     img.Save(dosyaYolu);
                     var ff = new FirmaRepo().GetById(firma.Id);
-                    ff.FirmaProfilFotoPath = $"Upload/{firma.Id}/{fileName}.{extName}";
+                    ff.FirmaProfilFotoPath = $"Upload/{firma.Id}/{fileName}{extName}";
                     new FirmaRepo().Update();
                 }
                 if (model.FirmaKapakFotoFile != null && model.FirmaKapakFotoFile.ContentLength > 0)
@@ -108,11 +108,11 @@ namespace ST.UI.MVC.Controllers
                     WebImage img = new WebImage(dosyaYolu);
                     //1670x480
                     img.Resize(1670, 480, false);
-                    img.AddTextWatermark("Sefer Tası - BAU", "Tomato", opacity: 75, fontSize: 16, fontFamily: "Verdana",
+                    img.AddTextWatermark("Sefer Tası - BAU", "Tomato", opacity: 75, fontSize: 26, fontFamily: "Verdana",
                         horizontalAlign: "Left");
                     img.Save(dosyaYolu);
                     var ff = new FirmaRepo().GetById(firma.Id);
-                    ff.FirmaKapakFotoPath = $"Upload/{firma.Id}/{fileName}.{extName}";
+                    ff.FirmaKapakFotoPath = $"Upload/{firma.Id}/{fileName}{extName}";
                     new FirmaRepo().Update();
                 }
                 return RedirectToAction("Index");
