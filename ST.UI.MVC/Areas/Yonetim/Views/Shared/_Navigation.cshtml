@@ -35,7 +35,10 @@
                 </ul>
             </li>
             <li class="@Html.IsSelected(controller: "UrunKategori")">
-                <a href="@Url.Action("Index", "UrunKategori")"><i class="fa fa-diamond"></i> <span class="nav-label" data-i18n="nav.layouts">Ürün Kategorileri</span> <span class="label label-primary pull-right">NEW</span></a>
+                <a href="@Url.Action("Index", "UrunKategori")"><i class="fa fa-product-hunt"></i> <span class="nav-label" data-i18n="nav.layouts">Ürün Kategorileri</span></a>
+            </li>
+            <li class="@Html.IsSelected(controller: "FirmaYonetim")">
+                <a href="@Url.Action("Index", "FirmaYonetim")"><i class="fa fa-certificate"></i> <span class="nav-label" data-i18n="nav.layouts">Firma Yönetim</span> </a>
             </li>
             <li class="@Html.IsSelected(controller: "Graphs")">
                 <a href="#"><i class="fa fa-bar-chart-o"></i> <span class="nav-label" data-i18n="nav.graphs">Graphs</span><span class="fa arrow"></span></a>

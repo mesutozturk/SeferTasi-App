@@ -1,7 +1,7 @@
 ﻿<!DOCTYPE html>
 <html>
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -9,59 +9,62 @@
     <title>Sefer Tası | @ViewBag.Title</title>
 
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700' rel='stylesheet' type='text/css'>
+    <link href="~/Content/angular-material.css" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"/>
     <!-- Add local styles, mostly for plugins css file -->
     @if (IsSectionDefined("Styles"))
     {@RenderSection("Styles", required: false)}
-     
-     <!-- Add jQuery Style direct - used for jQGrid plugin -->
-     <link href="@Url.Content("~/Areas/Yonetim/Scripts/plugins/jquery-ui/jquery-ui.css")" rel="stylesheet" type="text/css" />
-  
-     <!-- Primary Inspinia style -->     
-     @Styles.Render("~/Areas/Yonetim/Content/css")
-     @Styles.Render("~/Areas/Yonetim/font-awesome/css")
 
-     </head>
-     <body>
-     <!-- Wrapper-->
-     <!-- PageClass give you ability to specify custom style for specific view based on action -->
-     <div id="wrapper" class="@Html.PageClass()">
+    <!-- Add jQuery Style direct - used for jQGrid plugin -->
+    <link href="@Url.Content("~/Areas/Yonetim/Scripts/plugins/jquery-ui/jquery-ui.css")" rel="stylesheet" type="text/css" />
 
-         <!-- Navigation -->
-         @Html.Partial("_Navigation")
+    <!-- Primary Inspinia style -->
+    @Styles.Render("~/Areas/Yonetim/Content/css")
+    @Styles.Render("~/Areas/Yonetim/font-awesome/css")
+    
+</head>
+<body>
+    <!-- Wrapper-->
+    <!-- PageClass give you ability to specify custom style for specific view based on action -->
+    <div id="wrapper" class="@Html.PageClass()">
 
-         <!-- Page wraper -->
-         <div id="page-wrapper" class="gray-bg @ViewBag.SpecialClass">
+        <!-- Navigation -->
+        @Html.Partial("_Navigation")
 
-             <!-- Top Navbar -->
-             @Html.Partial("_TopNavbar")
+        <!-- Page wraper -->
+        <div id="page-wrapper" class="gray-bg @ViewBag.SpecialClass">
 
-             <!-- Main view  -->
-             @RenderBody()
+            <!-- Top Navbar -->
+            @Html.Partial("_TopNavbar")
 
-             <!-- Footer -->
-             @Html.Partial("_Footer")
+            <!-- Main view  -->
+            @RenderBody()
 
-         </div>
-         <!-- End page wrapper-->
+            <!-- Footer -->
+            @Html.Partial("_Footer")
 
-         <!-- Right Sidebar -->
-         @Html.Partial("_RightSidebar")
+        </div>
+        <!-- End page wrapper-->
+        <!-- Right Sidebar -->
+        @Html.Partial("_RightSidebar")
 
-     </div>
-     <!-- End wrapper-->
+    </div>
+    <!-- End wrapper-->
+    <!-- Section for main scripts render -->
+    @Scripts.Render("~/Areas/Yonetim/bundles/jquery")
+    @Scripts.Render("~/Areas/Yonetim/bundles/bootstrap")
+    @Scripts.Render("~/Areas/Yonetim/plugins/slimScroll")
+    @Scripts.Render("~/Areas/Yonetim/bundles/inspinia")
 
-     <!-- Section for main scripts render -->
-     @Scripts.Render("~/Areas/Yonetim/bundles/jquery")
-     @Scripts.Render("~/Areas/Yonetim/bundles/bootstrap")
-     @Scripts.Render("~/Areas/Yonetim/plugins/slimScroll")
-     @Scripts.Render("~/Areas/Yonetim/bundles/inspinia")
+    <!-- Skin config script - only for demo purpose-->
+    @Scripts.Render("~/Areas/Yonetim/bundles/skinConfig")
 
-     <!-- Skin config script - only for demo purpose-->
-     @Scripts.Render("~/Areas/Yonetim/bundles/skinConfig")
-         
-         <script src="~/Scripts/angular.js"></script>
-         <script src="~/Scripts/app.js"></script>
-     <!-- Handler for local scripts -->
-     @RenderSection("scripts", required: false)
-     </body>
-     </html>
+    <script src="~/Scripts/angular.js"></script>
+    <script src="~/Scripts/angular-animate.js"></script>
+    <script src="~/Scripts/angular-aria.js"></script>
+    <script src="~/Scripts/angular-material.js"></script>
+    <script src="~/Scripts/app.js"></script>
+    <!-- Handler for local scripts -->
+    @RenderSection("scripts", required: false)
+</body>
+</html>

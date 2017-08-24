@@ -1532,6 +1532,13 @@
     <Content Include="Areas\Yonetim\Scripts\plugins\velocity\velocity.min.js" />
     <Content Include="Areas\Yonetim\Scripts\plugins\velocity\velocity.ui.min.js" />
     <Content Include="Areas\Yonetim\Scripts\plugins\video\responsible-video.js" />
+    <Content Include="Content\angular-material.css" />
+    <Content Include="Content\angular-material.layout-attributes.css" />
+    <Content Include="Content\angular-material.layout-attributes.min.css" />
+    <Content Include="Content\angular-material.layouts.css" />
+    <Content Include="Content\angular-material.layouts.ie_fixes.css" />
+    <Content Include="Content\angular-material.layouts.min.css" />
+    <Content Include="Content\angular-material.min.css" />
     <Content Include="css\animate.css" />
     <Content Include="css\animate.min.css" />
     <Content Include="css\animsition.min.css" />
@@ -1592,6 +1599,13 @@
     <Content Include="js\markerclusterer.js" />
     <Content Include="js\markerclusterer.min.js" />
     <Content Include="js\tether.min.js" />
+    <Content Include="Scripts\angular-animate.js" />
+    <Content Include="Scripts\angular-animate.min.js" />
+    <Content Include="Scripts\angular-aria.js" />
+    <Content Include="Scripts\angular-aria.min.js" />
+    <Content Include="Scripts\angular-material-mocks.js" />
+    <Content Include="Scripts\angular-material.js" />
+    <Content Include="Scripts\angular-material.min.js" />
     <Content Include="Scripts\angular-mocks.js" />
     <Content Include="Scripts\angular.js" />
     <Content Include="Scripts\angular.min.js" />
@@ -1603,9 +1617,11 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.cs" />
     <Compile Include="Areas\Yonetim\Controllers\AnaController.cs" />
+    <Compile Include="Areas\Yonetim\Controllers\FirmaYonetimController.cs" />
     <Compile Include="Areas\Yonetim\Controllers\UrunKategoriController.cs" />
     <Compile Include="Areas\Yonetim\YonetimAreaRegistration.cs" />
     <Compile Include="Controllers\AnaController.cs" />
+    <Compile Include="Controllers\FirmaController.cs" />
     <Compile Include="Controllers\HesapController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -1684,6 +1700,7 @@
     <Content Include="fonts\whateverittakesbold.woff2" />
     <Content Include="Areas\Yonetim\Views\Ana\Index.cshtml" />
     <Content Include="Areas\Yonetim\Views\UrunKategori\Index.cshtml" />
+    <Content Include="Areas\Yonetim\Views\FirmaYonetim\Index.cshtml" />
     <None Include="packages.config" />
     <Content Include="Views\_LayoutPage.cshtml" />
     <Content Include="Views\Shared\_AppSectionPartial.cshtml" />
@@ -1694,6 +1711,8 @@
     <Content Include="Views\Ana\Index.cshtml" />
     <Content Include="Views\Hesap\Profilim.cshtml" />
     <Content Include="Scripts\angular.min.js.map" />
+    <Content Include="Scripts\angular-animate.min.js.map" />
+    <Content Include="Scripts\angular-aria.min.js.map" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -1705,6 +1724,7 @@
     <Folder Include="App_Data\" />
     <Folder Include="Areas\Yonetim\Models\" />
     <Folder Include="Models\" />
+    <Folder Include="Views\Firma\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\ST.BLL\ST.BLL.csproj">

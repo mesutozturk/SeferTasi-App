@@ -19,10 +19,14 @@
     </div>
     <div class="row">
         <div class="col-lg-12">
-            <div class="wrapper wrapper-content">
-
+            <div class="wrapper wrapper-content" id="maindiv">
 
                 <div class="row">
+                    <div class="col-md-6 col-md-offset-3">
+                        <md-progress-circular ng-show="yukleniyor" class="md-warn md-hue-3" md-diameter="96"></md-progress-circular>
+                    </div>
+                </div>
+                <div class="row" ng-show="!yukleniyor">
                     <div class="col-md-6" ng-if="duzenlenecek==null">
                         <form ng-submit="ekle()" class="form-horizontal">
                             <div class="form-group">
@@ -66,7 +70,7 @@
                         </form>
                     </div>
                 </div>
-                <div class="row">
+                <div class="row" ng-show="!yukleniyor">
                     <table class="table table-hover">
                         <thead>
                             <tr>
@@ -77,15 +81,15 @@
                             </tr>
                         </thead>
                         <tbody>
-                        <tr ng-repeat="(key,item) in kategoriler">
-                            <th scope="row">{{key+1}}</th>
-                            <td>{{item.KategoriAdi}}</td>
-                            <td>{{item.Aciklama}}</td>
-                            <td>
-                                <input type="button" class="btn btn-block btn-warning" value="Düzenle" ng-click="duzenle(item)" />
-                                <input type="button" class="btn btn-block btn-danger" value="Sil" ng-click="sil(item.Id)"/>
-                            </td>
-                        </tr>
+                            <tr ng-repeat="(key,item) in kategoriler">
+                                <th scope="row">{{key+1}}</th>
+                                <td>{{item.KategoriAdi}}</td>
+                                <td>{{item.Aciklama}}</td>
+                                <td>
+                                    <input type="button" class="btn btn-block btn-warning" value="Düzenle" ng-click="duzenle(item)" />
+                                    <input type="button" class="btn btn-block btn-danger" value="Sil" ng-click="sil(item.Id)" />
+                                </td>
+                            </tr>
                         </tbody>
                     </table>
                 </div>
