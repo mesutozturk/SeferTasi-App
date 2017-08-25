@@ -1,0 +1,59 @@
+﻿@model FirmaUrunEkleViewModel
+@{
+    ViewBag.Title = "Ürün Ekle";
+    Layout = "~/Views/_LayoutPage.cshtml";
+}
+
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-8">
+            <div class="widget">
+                <div class="widget-body">
+                    <span class="text text-danger">@Html.ValidationSummary()</span>
+                    @using (Html.BeginForm("UrunEkle", "Firma", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                    {
+                        @Html.AntiForgeryToken()
+                        <div class="row">
+                            <div class="form-group col-sm-6">
+                                @Html.LabelFor(x => x.UrunAdi)
+                                @Html.TextBoxFor(x => x.UrunAdi, new { @class = "form-control" })
+                                <span class="text text-danger">
+                                    @Html.ValidationMessageFor(x => x.UrunAdi)
+                                </span>
+                            </div>
+                            <div class="form-group col-sm-6">
+                                <label>Kategori Adı</label>
+                                @Html.DropDownListFor(x => x.UrunKategoriId, (List<SelectListItem>)ViewBag.Kategoriler, new { @class = "form-control" })
+                            </div>
+                            <div class="form-group col-sm-6">
+                                @Html.LabelFor(x => x.Fiyat)
+                                @Html.TextBoxFor(x => x.Fiyat, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(x => x.Fiyat)
+                            </div>
+                            <div class="form-group col-sm-6">
+                                <label>Ürün Fotoğrafı</label>
+                                @Html.TextBoxFor(x => x.UrunFotografFile, new { @class = "form-control", type = "file" })
+                            </div>
+                            <div class="form-group col-sm-6">
+                                @Html.LabelFor(x => x.SatistaMi)
+                                @Html.CheckBoxFor(x => x.SatistaMi, new { @class = "checkbox" })
+                            </div>
+                            
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-4">
+                                <p>
+                                    <input type="submit" class="btn theme-btn" value="Ürün Ekle" />
+                                </p>
+                            </div>
+                        </div>
+                    }
+
+                </div>
+                <!-- end: Widget -->
+            </div>
+            <!-- /REGISTER -->
+        </div>
+    </div>
+</div>

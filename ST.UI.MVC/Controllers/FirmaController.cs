@@ -7,6 +7,8 @@ using ST.BLL.Repository;
 using ST.BLL.Settings;
 using ST.Models.Entities;
 using ST.Models.ViewModels;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace ST.UI.MVC.Controllers
 {
@@ -229,5 +231,96 @@ namespace ST.UI.MVC.Controllers
                 return View(model);
             }
         }
+        public ActionResult Urun()
+        {
+            var firma = new FirmaRepo().GetByUserId(HttpContext.User.Identity.GetUserId());
+            if (firma == null)
+                return RedirectToAction("index");
+
+            return View();
+        }
+        public ActionResult UrunEkle()
+        {
+            var firma = new FirmaRepo().GetByUserId(HttpContext.User.Identity.GetUserId());
+            if (firma == null)
+                return RedirectToAction("index");
+
+            ViewBag.Kategoriler = KategoriSelectList();
+
+            return View();
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult UrunEkle(FirmaUrunEkleViewModel model)
+        {
+            ViewBag.Kategoriler = KategoriSelectList();
+            if (!ModelState.IsValid)
+                return View(model);
+            var firma = new FirmaRepo().GetByUserId(HttpContext.User.Identity.GetUserId());
+
+            var urun = new UrunRepo().GetAll().Where(x => x.UrunAdi.ToLower() == model.UrunAdi.ToLower()).FirstOrDefault();
+            if (urun == null)
+            {
+                var yeniUrun = new Urun()
+                {
+                    UrunAdi = model.UrunAdi,
+                    UrunKategoriId = model.UrunKategoriId
+                };
+                new UrunRepo().Insert(yeniUrun);
+                if (model.UrunFotografFile != null && model.UrunFotografFile.ContentLength > 0)
+                {
+                    var file = model.UrunFotografFile;
+                    string fileName = Path.GetFileNameWithoutExtension(file.FileName);
+                    string extName = Path.GetExtension(file.FileName);
+                    fileName = fileName?.Replace(" ", "");
+                    fileName += Guid.NewGuid().ToString().Replace("-", "");
+                    fileName = SiteSettings.UrlFormatConverter(fileName);
+                    var klasorYolu = Server.MapPath("~/Upload/Urunler/" + model.UrunKategoriId);
+                    var dosyaYolu = Server.MapPath("~/Upload/Urunler/" + model.UrunKategoriId + "/") + fileName + extName;
+                    if (!Directory.Exists(klasorYolu))
+                        Directory.CreateDirectory(klasorYolu);
+                    file.SaveAs(dosyaYolu);
+                    WebImage img = new WebImage(dosyaYolu);
+                    //100x80
+                    img.Resize(1000, 800, false);
+                    img.AddTextWatermark("Sefer Tası - BAU", "Tomato", opacity: 75, fontSize: 12, fontFamily: "Verdana",
+                        horizontalAlign: "Left");
+                    img.Save(dosyaYolu);
+                    var uu = new UrunRepo().GetById(yeniUrun.Id);
+                    uu.UrunFotografYolu = $"Upload/Urunler/{model.UrunKategoriId}/{fileName}{extName}";
+                    new UrunRepo().Update();
+                }
+                new FirmaUrunRepo().Insert(new FirmaUrun()
+                {
+                    FirmaId = firma.Id,
+                    SatistaMi = model.SatistaMi,
+                    UrunFiyat = model.Fiyat,
+                    UrunId = yeniUrun.Id
+                });
+            }
+            else
+            {
+                new FirmaUrunRepo().Insert(new FirmaUrun()
+                {
+                    FirmaId = firma.Id,
+                    SatistaMi = model.SatistaMi,
+                    UrunFiyat = model.Fiyat,
+                    UrunId = urun.Id
+                });
+            }
+            return RedirectToAction("Urun");
+        }
+        private List<SelectListItem> KategoriSelectList()
+        {
+            List<SelectListItem> kategoriler = new List<SelectListItem>();
+            new UrunKategoriRepo().GetAll().OrderBy(x => x.KategoriAdi).ToList().ForEach(x =>
+            kategoriler.Add(new SelectListItem()
+            {
+                Text = x.KategoriAdi,
+                Value = x.Id.ToString()
+            }));
+            return kategoriler;
+        }
+
     }
 }
