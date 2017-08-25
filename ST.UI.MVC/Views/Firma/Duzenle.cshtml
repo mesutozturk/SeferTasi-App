@@ -1,0 +1,142 @@
+﻿@model FirmaViewModel
+@{
+    ViewBag.Title = $"{Model.FirmaAdi} - Düzenle";
+    Layout = "~/Views/_LayoutPage.cshtml";
+}
+
+<div class="container">
+    <section class="inner-page-hero bg-image" data-image-src="@(string.IsNullOrEmpty(Model.FirmaKapakFotoPath)?"http://placehold.it/1670x480" : "../"+Model.FirmaKapakFotoPath)">
+        <div class="profile">
+            <div class="container">
+                <div class="row">
+                    <div class="col-xs-12 col-sm-12  col-md-4 col-lg-4 profile-img">
+                        <div class="image-wrap">
+                            <figure><img src="@(string.IsNullOrEmpty(Model.FirmaProfilFotoPath)?"http://placehold.it/240x140" : "../"+Model.FirmaProfilFotoPath)" alt="@Model.FirmaAdi"></figure>
+                        </div>
+                    </div>
+                    <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8 profile-desc">
+                        <div class="pull-left right-text white-txt">
+                            <h6><a href="#">@Model.FirmaAdi</a></h6> 
+                            <p>@Model.Adres</p>
+                            <ul class="nav nav-inline">
+                                <li class="nav-item">
+                                    <a class="nav-link active" href="#">
+                                        <i class="fa fa-check"></i> Min @($"{Model.MinimumSiparisTutari:c2}")
+                                    </a>
+                                </li>
+                                <li class="nav-item"> <a class="nav-link" href="#"><i class="fa fa-motorcycle"></i> @Model.OrtalamaTeslimSuresi dk.</a> </li>
+                                <li class="nav-item ratings">
+                                    <a class="nav-link" href="#">
+                                        <span>
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star-o"></i>
+                                        </span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <div class="row">
+        <div class="col-md-8">
+            <div class="widget">
+                <div class="widget-body">
+                    <span class="text text-danger">@Html.ValidationSummary()</span>
+                    @using (Html.BeginForm("Duzenle", "Firma", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                    {
+                        @Html.AntiForgeryToken()
+                        @Html.HiddenFor(x=>x.Id)
+                        <div class="row">
+                            <div class="form-group col-sm-6">
+                                @Html.LabelFor(x => x.FirmaAdi)
+                                @Html.TextBoxFor(x => x.FirmaAdi, new { @class = "form-control" })
+                                <span class="text text-danger">
+                                    @Html.ValidationMessageFor(x => x.FirmaAdi)
+                                </span>
+                            </div>
+                            <div class="form-group col-sm-6">
+                                @Html.LabelFor(x => x.Telefon)
+                                @Html.TextBoxFor(x => x.Telefon, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(x => x.Telefon)
+                            </div>
+                            <div class="form-group col-sm-12">
+                                @Html.LabelFor(x => x.Adres)
+                                @Html.TextBoxFor(x => x.Adres, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(x => x.Adres)
+                            </div>
+                            <div class="form-group col-sm-6">
+                                @Html.LabelFor(x => x.MinimumSiparisTutari)
+                                @Html.TextBoxFor(x => x.MinimumSiparisTutari, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(x => x.MinimumSiparisTutari)
+                            </div>
+                            <div class="form-group col-sm-6">
+                                @Html.LabelFor(x => x.OrtalamaTeslimSuresi)
+                                @Html.TextBoxFor(x => x.OrtalamaTeslimSuresi, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(x => x.OrtalamaTeslimSuresi)
+                            </div>
+                            <div class="form-group col-sm-6">
+                                @Html.LabelFor(x => x.WebUrl)
+                                @Html.TextBoxFor(x => x.WebUrl, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(x => x.WebUrl)
+                            </div>
+                            <div class="form-group col-sm-12">
+                                <label>Firma Profil Resmi</label>
+                                @Html.TextBoxFor(x => x.FirmaProfilFotoFile, new { @class = "form-control", type = "file" })
+                            </div>
+                            <div class="form-group col-sm-12">
+                                <label>Firma Kapak Resmi</label>
+                                @Html.TextBoxFor(x => x.FirmaKapakFotoFile, new { @class = "form-control", type = "file" })
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-4">
+                                <p>
+                                    <input type="submit" class="btn theme-btn" value="Firmanı Güncelle" />
+                                </p>
+                            </div>
+                        </div>
+                    }
+
+                </div>
+                <!-- end: Widget -->
+            </div>
+            <!-- /REGISTER -->
+        </div>
+        <!-- WHY? -->
+        <div class="col-md-4">
+            <h4>Registration is fast, easy, and free.</h4>
+            <p>Once you"re registered, you can:</p>
+            <hr>
+            <img src="http://placehold.it/400x300" alt="" class="img-fluid">
+            <p></p>
+            <div class="panel">
+                <div class="panel-heading">
+                    <h4 class="panel-title"><a data-parent="#accordion" data-toggle="collapse" class="panel-toggle collapsed" href="#faq1" aria-expanded="false"><i class="ti-info-alt" aria-hidden="true"></i>Can I viverra sit amet quam eget lacinia?</a></h4>
+                </div>
+                <div class="panel-collapse collapse" id="faq1" aria-expanded="false" role="article" style="height: 0px;">
+                    <div class="panel-body"> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam rutrum ut erat a ultricies. Phasellus non auctor nisi, id aliquet lectus. Vestibulum libero eros, aliquet at tempus ut, scelerisque sit amet nunc. Vivamus id porta neque, in pulvinar ipsum. Vestibulum sit amet quam sem. Pellentesque accumsan consequat venenatis. Pellentesque sit amet justo dictum, interdum odio non, dictum nisi. Fusce sit amet turpis eget nibh elementum sagittis. Nunc consequat lacinia purus, in consequat neque consequat id. </div>
+                </div>
+            </div>
+            <!-- end:panel -->
+            <div class="panel">
+                <div class="panel-heading">
+                    <h4 class="panel-title"><a data-parent="#accordion" data-toggle="collapse" class="panel-toggle" href="#faq2" aria-expanded="true"><i class="ti-info-alt" aria-hidden="true"></i>Can I viverra sit amet quam eget lacinia?</a></h4>
+                </div>
+                <div class="panel-collapse collapse" id="faq2" aria-expanded="true" role="article">
+                    <div class="panel-body"> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam rutrum ut erat a ultricies. Phasellus non auctor nisi, id aliquet lectus. Vestibulum libero eros, aliquet at tempus ut, scelerisque sit amet nunc. Vivamus id porta neque, in pulvinar ipsum. Vestibulum sit amet quam sem. Pellentesque accumsan consequat venenatis. Pellentesque sit amet justo dictum, interdum odio non, dictum nisi. Fusce sit amet turpis eget nibh elementum sagittis. Nunc consequat lacinia purus, in consequat neque consequat id. </div>
+                </div>
+            </div>
+            <!-- end:Panel -->
+            <h4 class="m-t-20">Contact Customer Support</h4>
+            <p> If you"re looking for more help or have a question to ask, please </p>
+            <p> <a href="contact.html" class="btn theme-btn m-t-15">contact us</a> </p>
+        </div>
+    </div>
+</div>
+

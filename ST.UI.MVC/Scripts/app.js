@@ -43,6 +43,25 @@ app.factory("api", function ($http) {
             }).then(function (response) {
                 success(response.data);
             });
+        },
+        firmagetir: function (success) {
+            $http({
+                url: apiurl + 'FirmaYonetim/Getir',
+                method: 'GET',
+                dataType: 'JSON'
+            }).then(function (response) {
+                success(response.data);
+            });
+        },
+        firmaguncelle: function (model, success) {
+            $http({
+                url: apiurl + 'FirmaYonetim/Guncelle',
+                data: model,
+                method: 'POST',
+                dataType: 'JSON'
+            }).then(function (response) {
+                success(response.data);
+            });
         }
     }
 });
@@ -110,3 +129,38 @@ app.controller("UrunKategoriCtrl",
         }
         init();
     });
+app.controller("FirmaCtrl", function ($scope, api, $mdDialog) {
+    $scope.yukleniyor = false;
+    $scope.firmalar = [];
+    $scope.duzenlenecek = null;
+    function init() {
+        $scope.yukleniyor = true;
+        api.firmagetir(function (data) {
+            console.log(data);
+            $scope.firmalar = data;
+            $scope.yukleniyor = false;
+        });
+    }
+    $scope.duzenle = function (firma) {
+        $scope.duzenlenecek = {
+            Id: firma.Id,
+            AktifMi: firma.AktifMi,
+            MinimumSiparisTutari: firma.MinimumSiparisTutari,
+            OrtalamaTeslimSuresi: firma.OrtalamaTeslimSuresi,
+            FirmaAdi: firma.FirmaAdi
+        };
+    }
+    $scope.guncelle = function () {
+        $scope.yukleniyor = true;
+        api.firmaguncelle($scope.duzenlenecek,
+            function (data) {
+                console.log(data);
+                init();
+                alert(data.message);
+                if (data.success === true)
+                    $scope.duzenlenecek = null;
+                $scope.yukleniyor = false;
+            });
+    }
+    init();
+});

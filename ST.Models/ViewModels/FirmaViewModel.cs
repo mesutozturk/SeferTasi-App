@@ -34,5 +34,6 @@ namespace ST.Models.ViewModels
 
         public HttpPostedFileBase FirmaProfilFotoFile { get; set; }
         public HttpPostedFileBase FirmaKapakFotoFile { get; set; }
+        public string KullaniciAdi { get; set; }
     }
 }

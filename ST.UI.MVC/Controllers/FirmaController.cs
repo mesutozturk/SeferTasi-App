@@ -151,6 +151,7 @@ namespace ST.UI.MVC.Controllers
             return View(model);
         }
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult Duzenle(FirmaViewModel model)
         {
             if (!ModelState.IsValid)
@@ -187,18 +188,46 @@ namespace ST.UI.MVC.Controllers
                     }
                     else
                     {
-                        System.IO.File.Delete(Server.MapPath(firma.FirmaProfilFotoPath));
+                        System.IO.File.Delete(Server.MapPath("~/" + firma.FirmaProfilFotoPath));
                         firma.FirmaProfilFotoPath = $"Upload/{firma.Id}/{fileName}{extName}";
                     }
-                    //ff.FirmaProfilFotoPath = $"Upload/{firma.Id}/{fileName}{extName}";
-                    new FirmaRepo().Update();
                 }
+                if (model.FirmaKapakFotoFile != null && model.FirmaKapakFotoFile.ContentLength > 0)
+                {
+                    var file = model.FirmaKapakFotoFile;
+                    string fileName = Path.GetFileNameWithoutExtension(file.FileName);
+                    string extName = Path.GetExtension(file.FileName);
+                    fileName = fileName?.Replace(" ", "");
+                    fileName += Guid.NewGuid().ToString().Replace("-", "");
+                    fileName = SiteSettings.UrlFormatConverter(fileName);
+                    var klasorYolu = Server.MapPath("~/Upload/" + firma.Id);
+                    var dosyaYolu = Server.MapPath("~/Upload/" + firma.Id + "/") + fileName + extName;
+                    if (!Directory.Exists(klasorYolu))
+                        Directory.CreateDirectory(klasorYolu);
+                    file.SaveAs(dosyaYolu);
+                    WebImage img = new WebImage(dosyaYolu);
+                    //1670x480
+                    img.Resize(1670, 480, false);
+                    img.AddTextWatermark("Sefer Tası - BAU", "Tomato", opacity: 75, fontSize: 26, fontFamily: "Verdana",
+                        horizontalAlign: "Left");
+                    img.Save(dosyaYolu);
+                    if (string.IsNullOrEmpty(firma.FirmaKapakFotoPath))
+                    {
+                        firma.FirmaKapakFotoPath = $"Upload/{firma.Id}/{fileName}{extName}";
+                    }
+                    else
+                    {
+                        System.IO.File.Delete(Server.MapPath("~/" + firma.FirmaKapakFotoPath));
+                        firma.FirmaKapakFotoPath = $"Upload/{firma.Id}/{fileName}{extName}";
+                    }
+                }
+                new FirmaRepo().Update();
+                return RedirectToAction("Index", "Firma");
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
-
+                return View(model);
             }
-            return View();
         }
     }
 }

@@ -1715,6 +1715,7 @@
     <Content Include="Scripts\angular-aria.min.js.map" />
     <Content Include="Views\Firma\Index.cshtml" />
     <Content Include="Views\Firma\Ekle.cshtml" />
+    <Content Include="Views\Firma\Duzenle.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

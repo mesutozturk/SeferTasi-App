@@ -1,8 +1,97 @@
 ﻿
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Firma Yönetim";
     Layout = "~/Areas/Yonetim/Views/Shared/_LayoutAdmin.cshtml";
 }
 
-<h2>Index</h2>
+<div ng-app="admin" ng-controller="FirmaCtrl" ng-cloak>
+    <div class="row wrapper border-bottom white-bg page-heading">
+        <div class="col-sm-4">
+            <h2>Firma Yönetimi</h2>
+            <ol class="breadcrumb">
+                <li>
+                    <a href="@Url.Action("Index","Ana",new{Area="Yonetim"})">Ana Sayfa</a>
+                </li>
+                <li class="active">
+                    <strong>Firma Yönetimi</strong>
+                </li>
+            </ol>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="wrapper wrapper-content" id="maindiv">
+
+                <div class="row">
+                    <div class="col-md-6 col-md-offset-3">
+                        <md-progress-circular ng-show="yukleniyor" class="md-warn md-hue-3" md-diameter="96"></md-progress-circular>
+                    </div>
+                </div>
+                <div class="row" ng-show="!yukleniyor">
+                    <div class="col-md-12" ng-if="duzenlenecek!=null">
+                        <form ng-submit="guncelle()" class="form-horizontal">
+                            <div class="form-group">
+                                <label class="col-sm-4 control-label">Firma Adı</label>
+                                <div class="col-sm-8">
+                                    <input type="text" class="form-control" ng-model="duzenlenecek.FirmaAdi" />
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-4 control-label">Minimum Sipariş Tutarı</label>
+                                <div class="col-sm-8">
+                                    <input type="text" class="form-control" ng-model="duzenlenecek.MinimumSiparisTutari" />
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-4 control-label">Ortalama Sipariş Süresi</label>
+                                <div class="col-sm-8">
+                                    <input type="text" class="form-control" ng-model="duzenlenecek.OrtalamaTeslimSuresi" />
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-4 control-label">Aktif Mi?</label>
+                                <div class="col-sm-8">
+                                    <input type="checkbox" class="checkbox" ng-model="duzenlenecek.AktifMi" />
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-sm-offset-4 col-sm-8">
+                                    <button type="submit" class="btn btn-success btn-block">Firma Güncelle</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <div class="row" ng-show="!yukleniyor">
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Firma Adı</th>
+                                <th>Aktif Mi</th>
+                                <th>Düzenle</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="(key,item) in firmalar">
+                                <th scope="row">{{key+1}}</th>
+                                <td>{{item.FirmaAdi}}</td>
+                                <td ng-if="item.AktifMi">
+                                    <span class="text text-success">Aktif</span>
+                                </td>
+                                <td ng-if="!item.AktifMi">
+                                    <span class="text text-danger">Pasif</span>
+                                </td>
+                                <td>
+                                    <input type="button" class="btn btn-block btn-warning" value="Düzenle" ng-click="duzenle(item)" />
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
 
