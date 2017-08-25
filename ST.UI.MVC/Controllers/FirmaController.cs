@@ -244,9 +244,8 @@ namespace ST.UI.MVC.Controllers
             var firma = new FirmaRepo().GetByUserId(HttpContext.User.Identity.GetUserId());
             if (firma == null)
                 return RedirectToAction("index");
-
             ViewBag.Kategoriler = KategoriSelectList();
-
+            
             return View();
         }
         [HttpPost]
