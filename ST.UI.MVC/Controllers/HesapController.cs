@@ -10,6 +10,7 @@ using ST.BLL.Account;
 using ST.Models.IdentityModels;
 using ST.Models.ViewModels;
 using static ST.BLL.Account.MembershipTools;
+using ST.BLL.Settings;
 
 namespace ST.UI.MVC.Controllers
 {
@@ -41,14 +42,15 @@ namespace ST.UI.MVC.Controllers
                 ModelState.AddModelError("", "Bu kullanici adı kullanılmaktadır");
                 return View(model);
             }
-
+            var actcode = Guid.NewGuid().ToString().Replace("-", "");
             var user = new ApplicationUser()
             {
                 Name = model.Name,
                 Email = model.Email,
                 PhoneNumber = model.Phone,
                 Surname = model.Surname,
-                UserName = model.Username
+                UserName = model.Username,
+                ActivationCode = actcode
             };
             bool adminMi = userManager.Users.Count() == 0;
             var sonuc = await userManager.CreateAsync(user, model.ConfirmPassword);
@@ -65,6 +67,12 @@ namespace ST.UI.MVC.Controllers
                     else
                         userManager.AddToRole(user.Id, "Musteri");
                 }
+                await SiteSettings.SendMail(new MailModel()
+                {
+                    To = user.Email,
+                    Subject = "Hoşgeldiniz",
+                    Message = $"Merhaba {user.UserName}, <br/>Sisteme başarıyla kaydoldunuz<br/>Hesabınızı aktifleştirmek için <a href='http://localhost:7723/hesap/aktivasyon?code={actcode}'>Aktivasyon Kodu</a>"
+                });
 
                 return RedirectToAction("Giris", "Hesap");
             }
@@ -126,7 +134,7 @@ namespace ST.UI.MVC.Controllers
                     IsPersistent = model.RememberMe
                 }, userIdentity);
             }
-            return RedirectToAction("Index","Ana");
+            return RedirectToAction("Index", "Ana");
         }
 
         [Authorize]
@@ -138,10 +146,10 @@ namespace ST.UI.MVC.Controllers
         [Authorize]
         public async Task<ActionResult> Profilim()
         {
-            string id= HttpContext.User.Identity.GetUserId();
+            string id = HttpContext.User.Identity.GetUserId();
             var userManager = NewUserManager();
             var user = await userManager.FindByIdAsync(id);
-            var model=new ProfileViewModel()
+            var model = new ProfileViewModel()
             {
                 Username = user.UserName,
                 Email = user.Email,

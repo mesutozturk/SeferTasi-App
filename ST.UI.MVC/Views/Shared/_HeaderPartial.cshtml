@@ -12,8 +12,11 @@
                         <div class="dropdown-menu"> <a class="dropdown-item" href="food_results.html">Food results</a> <a class="dropdown-item" href="map_results.html">Map results</a></div>
                     </li>
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Restaurants</a>
-                        <div class="dropdown-menu"> <a class="dropdown-item" href="restaurants.html">Search results</a> <a class="dropdown-item" href="profile.html">Profile page</a></div>
+                        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Firmalar</a>
+                        <div class="dropdown-menu">
+                            <a class="dropdown-item" href="@Url.Action("Restoranlar","Ana")">Restoranlar</a>
+                            <a class="dropdown-item" href="@Url.Action("Sepet","Ana")">Sepetim</a>
+                        </div>
                     </li>
                     @if (HttpContext.Current.User.Identity.IsAuthenticated)
                     {
@@ -27,15 +30,18 @@
                                 </a>
                                 @if (HttpContext.Current.User.IsInRole("Firma"))
                                 {
-                                    <a class="dropdown-item" href="@Url.Action("Index","Firma")">
-                                        Firmam
-                                    </a>
+                                <a class="dropdown-item" href="@Url.Action("Index","Firma")">
+                                    Firmam
+                                </a>
+                                <a class="dropdown-item" href="@Url.Action("UrunEkle","Firma")">
+                                    Ürün Ekle
+                                </a>
                                 }
                                 else if (HttpContext.Current.User.IsInRole("Admin"))
                                 {
-                                    <a class="dropdown-item" href="@Url.Action("Index", "Ana", new { Area = "Yonetim" })">
+                                <a class="dropdown-item" href="@Url.Action("Index", "Ana", new { Area = "Yonetim" })">
                                     Yönetici Paneli
-                                    </a>
+                                </a>
                                 }
 
 

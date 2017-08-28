@@ -1717,6 +1717,8 @@
     <Content Include="Views\Firma\Ekle.cshtml" />
     <Content Include="Views\Firma\Duzenle.cshtml" />
     <Content Include="Views\Firma\UrunEkle.cshtml" />
+    <Content Include="Views\Ana\Restoranlar.cshtml" />
+    <Content Include="Views\Ana\Detay.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

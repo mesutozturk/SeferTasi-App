@@ -1,0 +1,67 @@
+﻿@model List<FirmaViewModel>
+@{
+    ViewBag.Title = "Restoranlar";
+    Layout = "~/Views/_LayoutPage.cshtml";
+}
+
+<div class="top-links">
+    <div class="container">
+        <ul class="row links">
+            <li class="col-xs-12 col-sm-3 link-item active"><span>1</span><a href="restaurants.html">Restorant Seç</a></li>
+            <li class="col-xs-12 col-sm-3 link-item"><span>2</span><a href="profile.html">Yemeğini Seç</a></li>
+            <li class="col-xs-12 col-sm-3 link-item"><span>3</span><a href="checkout.html">Ödemeni Yap</a></li>
+        </ul>
+    </div>
+</div>
+<!-- end:Top links -->
+<!-- start: Inner page hero -->
+<div class="inner-page-hero bg-image" data-image-src="http://placehold.it/1670x480">
+    <div class="container"> </div>
+    <!-- end:Container -->
+</div>
+<div class="restaurant-page">
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                @foreach (var item in Model)
+                {
+                    <div class="bg-gray restaurant-entry">
+                        <div class="row">
+                            <div class="col-sm-12 col-md-12 col-lg-8 text-xs-center text-sm-left">
+                                <div class="entry-logo">
+                                    <a class="img-fluid" href="#">
+                                        <img src="@(string.IsNullOrEmpty(item.FirmaProfilFotoPath)?"http://placehold.it/110x110":"../"+item.FirmaProfilFotoPath)" alt="Food logo">
+                                    </a>
+                                </div>
+                                <!-- end:Logo -->
+                                <div class="entry-dscr">
+                                    <h5><a href="#">@item.FirmaAdi</a></h5> <span>
+                                        @item.Adres<a href="#">...</a>
+                                    </span>
+                                    <ul class="list-inline">
+                                        <li class="list-inline-item"><i class="fa fa-check"></i> @($"{item.MinimumSiparisTutari:c2} En az")</li>
+                                        <li class="list-inline-item"><i class="fa fa-motorcycle"></i> @($"{item.OrtalamaTeslimSuresi} dk.")</li>
+                                    </ul>
+                                </div>
+                                <!-- end:Entry description -->
+                            </div>
+                            <div class="col-sm-12 col-md-12 col-lg-4 text-xs-center">
+                                <div class="right-content bg-white">
+                                    <div class="right-review">
+                                        <div class="rating-block"> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star-o"></i> </div>
+                                        <p> 245 Reviews</p> <a href="@Url.Action("Detay", "Ana", new { id = item.Id, baslik = ST.BLL.Settings.SiteSettings.UrlFormatConverter(item.FirmaAdi) })" class="btn theme-btn-dash">
+                                        Firmayı seç</a>
+                                    </div>
+                                </div>
+                                <!-- end:right info -->
+                            </div>
+                        </div>
+                        <!--end:row -->
+                    </div>
+                <!-- end:Restaurant entry -->
+                }
+
+            </div>
+        </div>
+    </div>
+</div>

@@ -22,6 +22,7 @@ namespace ST.Models.IdentityModels
         public string Surname { get; set; }
         [Column(TypeName = "smalldatetime")]
         public DateTime RegisterDate { get; set; } = DateTime.Now;
+        public string ActivationCode { get; set; }
 
         public virtual List<Firma> Firmalar { get; set; } = new List<Firma>();
         public virtual List<Adres> Adresler { get; set; } = new List<Adres>();
