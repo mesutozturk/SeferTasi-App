@@ -71,7 +71,7 @@ namespace ST.UI.MVC.Controllers
                 {
                     To = user.Email,
                     Subject = "Hoşgeldiniz",
-                    Message = $"Merhaba {user.UserName}, <br/>Sisteme başarıyla kaydoldunuz<br/>Hesabınızı aktifleştirmek için <a href='http://localhost:7723/hesap/aktivasyon?code={actcode}'>Aktivasyon Kodu</a>"
+                    Message = $"Merhaba {user.UserName}, <br/>Sisteme başarıyla kaydoldunuz<br/>Hesabınızı aktifleştirmek için <a href='{SiteUrl()}/hesap/aktivasyon?code={actcode}'>Aktivasyon Kodu</a>"
                 });
 
                 return RedirectToAction("Giris", "Hesap");
@@ -203,6 +203,77 @@ namespace ST.UI.MVC.Controllers
             await userStore.Context.SaveChangesAsync();
 
             return RedirectToAction("Cikis");
+        }
+        public async Task<ActionResult> Aktivasyon(string code)
+        {
+            var userStore = NewUserStore();
+            var sonuc = userStore.Context.Set<ApplicationUser>().Where(x => x.ActivationCode == code).FirstOrDefault();
+            if (sonuc == null)
+            {
+                ViewBag.sonuc = "Aktivasyon başarısız";
+                return View();
+            }
+            sonuc.EmailConfirmed = true;
+            await userStore.UpdateAsync(sonuc);
+            await userStore.Context.SaveChangesAsync();
+            ViewBag.sonuc = "Aktivasyon başarılı";
+            await SiteSettings.SendMail(new MailModel()
+            {
+                To = sonuc.Email,
+                Subject = "Aktivasyon başarılı",
+                Message = $"Merhaba {sonuc.UserName}, Aktivasyon işleminiz başarılı :)"
+            });
+            HttpContext.GetOwinContext().Authentication.SignOut();
+            return View();
+        }
+        [Authorize]
+        public async Task<ActionResult> TekrarAktivasyonGonder()
+        {
+            var userStore = NewUserStore();
+            var userManager = new UserManager<ApplicationUser>(userStore);
+            var user = userManager.FindById(HttpContext.User.Identity.GetUserId());
+            await SiteSettings.SendMail(new MailModel()
+            {
+                To = user.Email,
+                Subject = "Aktivasyon Kodu",
+                Message = $"Merhaba {user.UserName}, <br/>Hesabınızı aktifleştirmek için <a href='{SiteUrl()}/hesap/aktivasyon?code={user.ActivationCode}'>Aktivasyon Kodu</a>"
+            });
+
+            return RedirectToAction("Profilim");
+        }
+        public ActionResult SifremiUnuttum()
+        {
+            return View();
+        }
+        [HttpPost]
+        public async Task<ActionResult> SifremiUnuttum(string name)
+        {
+            var userStore = NewUserStore();
+            var userManager = new UserManager<ApplicationUser>(userStore);
+            var user = userManager.FindByName(name);
+            var user2 = userManager.FindByEmail(name);
+            if (user == null && user2 == null)
+            {
+                ModelState.AddModelError(string.Empty, "Kullanıcı Bulunamadı");
+                return View();
+            }
+            var kullanici = user != null ? user : user2;
+            string parola = Guid.NewGuid().ToString().Replace("-", "").Substring(0, 6);
+            await userStore.SetPasswordHashAsync(kullanici, userManager.PasswordHasher.HashPassword(parola));
+            await userStore.UpdateAsync(kullanici);
+            await userStore.Context.SaveChangesAsync();
+            await SiteSettings.SendMail(new MailModel
+            {
+                To = kullanici.Email,
+                Subject = "Yeni parolanız",
+                Message = $"Merhaba {kullanici.UserName},<br/>Yeni parolanız: <b>{parola}</b><br/><a href='{SiteUrl()}/hesap/giris'>Giriş Yap</a>"
+            });
+            return RedirectToAction("Index", "Ana");
+        }
+        public string SiteUrl()
+        {
+            return Request.Url.Scheme + Uri.SchemeDelimiter + Request.Url.Host +
+(Request.Url.IsDefaultPort ? "" : ":" + Request.Url.Port);
         }
     }
 }

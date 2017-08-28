@@ -1719,6 +1719,8 @@
     <Content Include="Views\Firma\UrunEkle.cshtml" />
     <Content Include="Views\Ana\Restoranlar.cshtml" />
     <Content Include="Views\Ana\Detay.cshtml" />
+    <Content Include="Views\Hesap\Aktivasyon.cshtml" />
+    <Content Include="Views\Hesap\SifremiUnuttum.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
