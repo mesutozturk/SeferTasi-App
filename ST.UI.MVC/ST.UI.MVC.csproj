@@ -1599,6 +1599,7 @@
     <Content Include="js\markerclusterer.js" />
     <Content Include="js\markerclusterer.min.js" />
     <Content Include="js\tether.min.js" />
+    <Content Include="Scripts\anasayfaapp.js" />
     <Content Include="Scripts\angular-animate.js" />
     <Content Include="Scripts\angular-animate.min.js" />
     <Content Include="Scripts\angular-aria.js" />

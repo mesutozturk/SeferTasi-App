@@ -48,6 +48,11 @@ namespace ST.UI.MVC.Controllers
             if (basliktest.ToLower() != baslik.ToLower())
                 return RedirectToAction("Detay", new { id = firma.Id, baslik = basliktest });
 
+
+            //kategori
+            //kategorinin ürünleri
+            //firma bilgileri
+
             return View(firma);
         }
     }

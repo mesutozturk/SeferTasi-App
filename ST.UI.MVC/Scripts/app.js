@@ -3,8 +3,13 @@
 
 var app = angular.module("admin", ['ngMaterial']);
 
-app.factory("api", function ($http) {
+app.factory("api", function ($http, $location) {
     var apiurl = "http://localhost:7723/Yonetim/";
+    var baseUrl = $location.$$protocol + "://" + $location.$$host;
+    if ($location.$$port)
+        baseUrl += ":" + $location.$$port
+    console.log($location);
+    console.log(baseUrl);
     return {
         urunkategoriekle: function (model, success) {
             $http({
