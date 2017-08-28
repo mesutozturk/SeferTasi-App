@@ -3,6 +3,7 @@ using System.Linq;
 using System.Web.Mvc;
 using ST.Models.ViewModels;
 using ST.BLL.Settings;
+using System.Collections.Generic;
 
 namespace ST.UI.MVC.Controllers
 {
@@ -48,12 +49,58 @@ namespace ST.UI.MVC.Controllers
             if (basliktest.ToLower() != baslik.ToLower())
                 return RedirectToAction("Detay", new { id = firma.Id, baslik = basliktest });
 
-
+            ViewBag.firmaid = firma.Id;
             //kategori
             //kategorinin ürünleri
             //firma bilgileri
 
             return View(firma);
+        }
+        public JsonResult FirmaninUrunleriniGetir(int id)
+        {
+            var firma = new FirmaRepo().GetById(id);
+            if (firma == null)
+            {
+                return Json(new
+                {
+                    success = false,
+                    message = "Firma Bulunamadı"
+                }, JsonRequestBehavior.AllowGet);
+            }
+            var urunmodel = new List<FirmaUrunKategoriViewModel>();
+            new FirmaUrunRepo()
+                .GetAll()
+                .Where(x => x.SatistaMi = true && x.FirmaId == firma.Id)
+                .ToList().ForEach(x =>
+                    urunmodel.Add(new FirmaUrunKategoriViewModel
+                    {
+                        FiyatGorunum = $"{x.UrunFiyat:c2}",
+                        Fiyat = x.UrunFiyat,
+                        UrunId = x.UrunId,
+                        UrunAdi = x.Urun.UrunAdi,
+                        UrunResimPath = x.Urun.UrunFotografYolu,
+                        KategoriAdi = x.Urun.UrunKategori.KategoriAdi,
+                        KategoriAciklama = x.Urun.UrunKategori.Aciklama
+                    })
+                );
+
+
+            var firmaUrunModel = new FirmaUrunleriViewModel()
+            {
+                Id = firma.Id,
+                FirmaAdi = firma.FirmaAdi,
+                MinimumSiparisTutari = firma.MinimumSiparisTutari,
+                OrtalamaSiparisSuresi = firma.OrtalamaTeslimSuresi,
+                Urunler = urunmodel.OrderBy(x => x.KategoriAdi).ToList()
+            };
+
+
+            var data = new
+            {
+                success = true,
+                data = firmaUrunModel
+            };
+            return Json(data, JsonRequestBehavior.AllowGet);
         }
     }
 }

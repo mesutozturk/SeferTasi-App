@@ -5,189 +5,35 @@
 }
 
 <div class="container m-t-30" ng-app="site" ng-controller="SepetCtrl" ng-cloak>
+    <div style="display:none;">{{firmaid= @ViewBag.firmaid}}</div>
+
     <div class="row">
-        <div class="col-xs-12 col-sm-4 col-md-4 col-lg-3">
-            <div class="sidebar clearfix m-b-20">
-                <div class="main-block">
-                    <div class="sidebar-title white-txt">
-                        <h6>Choose Cusine {{2+2}}</h6> <i class="fa fa-cutlery pull-right"></i>
-                    </div>
-                    <ul>
-                        <li><a href="#1" class="scroll active">Pizza</a></li>
-                        <li><a href="#2" class="scroll">Barbecuing and Grilling</a></li>
-                        <li><a href="#3" class="scroll">Appetizers</a></li>
-                        <li><a href="#4" class="scroll">Soup and salads</a></li>
-                        <li><a href="#5" class="scroll">Pasta</a></li>
-                        <li><a href="#6" class="scroll">Seafood</a></li>
-                        <li><a href="#7" class="scroll">Beverages</a></li>
-                    </ul>
-                    <div class="clearfix"></div>
-                </div>
-                <!-- end:Sidebar nav -->
-                <div class="widget-delivery">
-                    <form>
-                        <div class="col-xs-6 col-sm-12 col-md-6 col-lg-6">
-                            <label class="custom-control custom-radio">
-                                <input id="radio1" name="radio" type="radio" class="custom-control-input" checked=""> <span class="custom-control-indicator"></span> <span class="custom-control-description">Delivery</span>
-                            </label>
-                        </div>
-                        <div class="col-xs-6 col-sm-12 col-md-6 col-lg-6">
-                            <label class="custom-control custom-radio">
-                                <input id="radio2" name="radio" type="radio" class="custom-control-input"> <span class="custom-control-indicator"></span> <span class="custom-control-description">Takeout</span>
-                            </label>
-                        </div>
-                    </form>
-                </div>
-            </div>
-            <!-- end:Left Sidebar -->
-            <div class="widget clearfix">
-                <!-- /widget heading -->
+        <div class="col-xs-12 col-sm-12 col-md-8 col-lg-9">
+            <div class="menu-widget m-b-30" ng-repeat="(key,value) in data.Urunler| groupBy:'KategoriAdi'">
                 <div class="widget-heading">
                     <h3 class="widget-title text-dark">
-                        Popular tags
-                    </h3>
-                    <div class="clearfix"></div>
-                </div>
-                <div class="widget-body">
-                    <ul class="tags">
-                        <li>
-                            <a href="#" class="tag">
-                                Coupons
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#" class="tag">
-                                Discounts
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#" class="tag">
-                                Deals
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#" class="tag">
-                                Amazon
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#" class="tag">
-                                Ebay
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#" class="tag">
-                                Fashion
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#" class="tag">
-                                Shoes
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#" class="tag">
-                                Kids
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#" class="tag">
-                                Travel
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#" class="tag">
-                                Hosting
-                            </a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-        <div class="col-xs-12 col-sm-8 col-md-8 col-lg-6">
-            <div class="menu-widget m-b-30">
-                <div class="widget-heading">
-                    <h3 class="widget-title text-dark">
-                        POPULAR ORDERS Delicious hot food! <a class="btn btn-link pull-right" data-toggle="collapse" href="#popular" aria-expanded="true">
+                        {{key}}<a class="btn btn-link pull-right" data-toggle="collapse" href="#popular" aria-expanded="true">
                             <i class="fa fa-angle-right pull-right"></i>
                             <i class="fa fa-angle-down pull-right"></i>
                         </a>
                     </h3>
                     <div class="clearfix"></div>
                 </div>
-                <div class="collapse in" id="1">
-                    <div class="food-item white">
+                <div class="collapse in">
+                    <div class="food-item" ng-repeat="urun in value">
                         <div class="row">
                             <div class="col-xs-12 col-sm-12 col-lg-8">
                                 <div class="rest-logo pull-left">
-                                    <a class="restaurant-logo pull-left" href="#"><img src="http://placehold.it/100x80" alt="Food logo"></a>
+                                    <a class="restaurant-logo pull-left" href="#"><img src="~/{{urun.UrunResimPath}}" alt="Food logo"></a>
                                 </div>
                                 <!-- end:Logo -->
                                 <div class="rest-descr">
-                                    <h6><a href="#">Veg Extravaganza</a></h6>
-                                    <p> Burgers, American, Sandwiches, Fast Food, BBQ</p>
+                                    <h6><a href="#">{{urun.UrunAdi}}</a></h6>
                                 </div>
                                 <!-- end:Description -->
                             </div>
                             <!-- end:col -->
-                            <div class="col-xs-12 col-sm-12 col-lg-4 pull-right item-cart-info"> <span class="price pull-left">$ 19.99</span> <a href="#" class="btn btn-small btn btn-secondary pull-right" data-toggle="modal" data-target="#order-modal">&#43;</a> </div>
-                        </div>
-                        <!-- end:row -->
-                    </div>
-                    <!-- end:Food item -->
-                    <div class="food-item">
-                        <div class="row">
-                            <div class="col-xs-12 col-sm-12 col-lg-8">
-                                <div class="rest-logo pull-left">
-                                    <a class="restaurant-logo pull-left" href="#"><img src="http://placehold.it/100x80" alt="Food logo"></a>
-                                </div>
-                                <!-- end:Logo -->
-                                <div class="rest-descr">
-                                    <h6><a href="#">Veg Extravaganza</a></h6>
-                                    <p> Burgers, American, Sandwiches, Fast Food, BBQ</p>
-                                </div>
-                                <!-- end:Description -->
-                            </div>
-                            <!-- end:col -->
-                            <div class="col-xs-12 col-sm-12 col-lg-4 pull-right item-cart-info"> <span class="price pull-left">$ 19.99</span> <a href="#" class="btn btn-small btn btn-secondary pull-right" data-toggle="modal" data-target="#order-modal">&#43;</a> </div>
-                        </div>
-                        <!-- end:row -->
-                    </div>
-                    <!-- end:Food item -->
-                    <div class="food-item white">
-                        <div class="row">
-                            <div class="col-xs-12 col-sm-12 col-lg-8">
-                                <div class="rest-logo pull-left">
-                                    <a class="restaurant-logo pull-left" href="#"><img src="http://placehold.it/100x80" alt="Food logo"></a>
-                                </div>
-                                <!-- end:Logo -->
-                                <div class="rest-descr">
-                                    <h6><a href="#">Veg Extravaganza</a></h6>
-                                    <p> Burgers, American, Sandwiches, Fast Food, BBQ</p>
-                                </div>
-                                <!-- end:Description -->
-                            </div>
-                            <!-- end:col -->
-                            <div class="col-xs-12 col-sm-12 col-lg-4 pull-right item-cart-info"> <span class="price pull-left">$ 19.99</span> <a href="#" class="btn btn-small btn btn-secondary pull-right" data-toggle="modal" data-target="#order-modal">&#43;</a> </div>
-                        </div>
-                        <!-- end:row -->
-                    </div>
-                    <!-- end:Food item -->
-                    <div class="food-item">
-                        <div class="row">
-                            <div class="col-xs-12 col-sm-12 col-lg-8">
-                                <div class="rest-logo pull-left">
-                                    <a class="restaurant-logo pull-left" href="#"><img src="http://placehold.it/100x80" alt="Food logo"></a>
-                                </div>
-                                <!-- end:Logo -->
-                                <div class="rest-descr">
-                                    <h6><a href="#">Veg Extravaganza</a></h6>
-                                    <p> Burgers, American, Sandwiches, Fast Food, BBQ</p>
-                                </div>
-                                <!-- end:Description -->
-                            </div>
-                            <!-- end:col -->
-                            <div class="col-xs-12 col-sm-12 col-lg-4 pull-right item-cart-info"> <span class="price pull-left">$ 19.99</span> <a href="#" class="btn btn-small btn btn-secondary pull-right" data-toggle="modal" data-target="#order-modal">&#43;</a> </div>
+                            <div class="col-xs-12 col-sm-12 col-lg-4 pull-right item-cart-info"> <span class="price pull-left">{{urun.FiyatGorunum}}</span> <a href="#" class="btn btn-small btn btn-secondary pull-right" data-toggle="modal" data-target="#order-modal">&#43;</a> </div>
                         </div>
                         <!-- end:row -->
                     </div>
@@ -330,7 +176,7 @@
             <!--/row -->
         </div>
         <!-- end:Bar -->
-        <div class="col-xs-12 col-md-12 col-lg-3">
+        <div class="col-xs-12 col-sm-12 col-md-4 col-lg-3">
             <div class="sidebar-wrap">
                 <div class="widget widget-cart">
                     <div class="widget-heading">
