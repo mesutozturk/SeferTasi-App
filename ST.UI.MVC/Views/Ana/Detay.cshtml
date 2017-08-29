@@ -33,98 +33,7 @@
                                 <!-- end:Description -->
                             </div>
                             <!-- end:col -->
-                            <div class="col-xs-12 col-sm-12 col-lg-4 pull-right item-cart-info"> <span class="price pull-left">{{urun.FiyatGorunum}}</span> <a href="#" class="btn btn-small btn btn-secondary pull-right" data-toggle="modal" data-target="#order-modal">&#43;</a> </div>
-                        </div>
-                        <!-- end:row -->
-                    </div>
-                    <!-- end:Food item -->
-                </div>
-                <!-- end:Collapse -->
-            </div>
-            <!-- end:Widget menu -->
-            <div class="menu-widget" id="2">
-                <div class="widget-heading">
-                    <h3 class="widget-title text-dark">
-                        POPULAR ORDERS Delicious hot food! <a class="btn btn-link pull-right" data-toggle="collapse" href="#popular2" aria-expanded="true">
-                            <i class="fa fa-angle-right pull-right"></i>
-                            <i class="fa fa-angle-down pull-right"></i>
-                        </a>
-                    </h3>
-                    <div class="clearfix"></div>
-                </div>
-                <div class="collapse in" id="popular2">
-                    <div class="food-item">
-                        <div class="row">
-                            <div class="col-xs-12 col-sm-12 col-lg-8">
-                                <div class="rest-logo pull-left">
-                                    <a class="restaurant-logo pull-left" href="#"><img src="http://placehold.it/100x80" alt="Food logo"></a>
-                                </div>
-                                <!-- end:Logo -->
-                                <div class="rest-descr">
-                                    <h6><a href="#">Veg Extravaganza</a></h6>
-                                    <p> Burgers, American, Sandwiches, Fast Food, BBQ</p>
-                                </div>
-                                <!-- end:Description -->
-                            </div>
-                            <!-- end:col -->
-                            <div class="col-xs-12 col-sm-12 col-lg-4 pull-right item-cart-info"> <span class="price pull-left">$ 19.99</span> <a href="#" class="btn btn-small btn btn-secondary pull-right" data-toggle="modal" data-target="#order-modal">&#43;</a> </div>
-                        </div>
-                        <!-- end:row -->
-                    </div>
-                    <!-- end:Food item -->
-                    <div class="food-item white">
-                        <div class="row">
-                            <div class="col-xs-12 col-sm-12 col-lg-8">
-                                <div class="rest-logo pull-left">
-                                    <a class="restaurant-logo pull-left" href="#"><img src="http://placehold.it/100x80" alt="Food logo"></a>
-                                </div>
-                                <!-- end:Logo -->
-                                <div class="rest-descr">
-                                    <h6><a href="#">Veg Extravaganza</a></h6>
-                                    <p> Burgers, American, Sandwiches, Fast Food, BBQ</p>
-                                </div>
-                                <!-- end:Description -->
-                            </div>
-                            <!-- end:col -->
-                            <div class="col-xs-12 col-sm-12 col-lg-4 pull-right item-cart-info"> <span class="price pull-left">$ 19.99</span> <a href="#" class="btn btn-small btn btn-secondary pull-right" data-toggle="modal" data-target="#order-modal">&#43;</a> </div>
-                        </div>
-                        <!-- end:row -->
-                    </div>
-                    <!-- end:Food item -->
-                    <div class="food-item">
-                        <div class="row">
-                            <div class="col-xs-12 col-sm-12 col-lg-8">
-                                <div class="rest-logo pull-left">
-                                    <a class="restaurant-logo pull-left" href="#"><img src="http://placehold.it/100x80" alt="Food logo"></a>
-                                </div>
-                                <!-- end:Logo -->
-                                <div class="rest-descr">
-                                    <h6><a href="#">Veg Extravaganza</a></h6>
-                                    <p> Burgers, American, Sandwiches, Fast Food, BBQ</p>
-                                </div>
-                                <!-- end:Description -->
-                            </div>
-                            <!-- end:col -->
-                            <div class="col-xs-12 col-sm-12 col-lg-4 pull-right item-cart-info"> <span class="price pull-left">$ 19.99</span> <a href="#" class="btn btn-small btn btn-secondary pull-right" data-toggle="modal" data-target="#order-modal">&#43;</a> </div>
-                        </div>
-                        <!-- end:row -->
-                    </div>
-                    <!-- end:Food item -->
-                    <div class="food-item white">
-                        <div class="row">
-                            <div class="col-xs-12 col-sm-12 col-lg-8">
-                                <div class="rest-logo pull-left">
-                                    <a class="restaurant-logo pull-left" href="#"><img src="http://placehold.it/100x80" alt="Food logo"></a>
-                                </div>
-                                <!-- end:Logo -->
-                                <div class="rest-descr">
-                                    <h6><a href="#">Veg Extravaganza</a></h6>
-                                    <p> Burgers, American, Sandwiches, Fast Food, BBQ</p>
-                                </div>
-                                <!-- end:Description -->
-                            </div>
-                            <!-- end:col -->
-                            <div class="col-xs-12 col-sm-12 col-lg-4 pull-right item-cart-info"> <span class="price pull-left">$ 19.99</span> <a href="#" class="btn btn-small btn btn-secondary pull-right" data-toggle="modal" data-target="#order-modal">&#43;</a> </div>
+                            <div class="col-xs-12 col-sm-12 col-lg-4 pull-right item-cart-info"> <span class="price pull-left">{{urun.FiyatGorunum}}</span> <a href="#" class="btn btn-small btn btn-secondary pull-right" data-toggle="modal" data-target="#order-modal" ng-click="sepeteekle(urun)">&#43;</a> </div>
                         </div>
                         <!-- end:row -->
                     </div>
@@ -181,65 +90,48 @@
                 <div class="widget widget-cart">
                     <div class="widget-heading">
                         <h3 class="widget-title text-dark">
-                            Your Shopping Cart
+                            Sepetiniz
                         </h3>
                         <div class="clearfix"></div>
                     </div>
-                    <div class="order-row bg-white">
+                    <div class="order-row bg-white" ng-repeat="urun in sepet">
                         <div class="widget-body">
-                            <div class="title-row">Pizza Quatro Stagione <a href="#"><i class="fa fa-trash pull-right"></i></a></div>
+                            <div class="title-row">
+                                {{urun.UrunAdi}}
+                                <a href="#" ng-click="sepettencikart(urun)"><i class="fa fa-trash pull-right"></i></a>
+                            </div>
                             <div class="form-group row no-gutter">
-                                <div class="col-xs-8">
-                                    <select class="form-control b-r-0" id="exampleSelect1">
-                                        <option>Size SM</option>
-                                        <option>Size LG</option>
-                                        <option>Size XL</option>
-                                    </select>
-                                </div>
-                                <div class="col-xs-4">
-                                    <input class="form-control" type="number" value="2" id="example-number-input">
+                                <div class="col-xs-12">
+                                    <input class="form-control" step="1" type="number" ng-model="urun.Adet" ng-change="adetarttir(urun)">
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div class="order-row">
-                        <div class="widget-body">
-                            <div class="title-row">Carlsberg Beer <a href="#"><i class="fa fa-trash pull-right"></i></a></div>
-                            <div class="form-group row no-gutter">
-                                <div class="col-xs-8">
-                                    <select class="form-control b-r-0">
-                                        <option>Size SM</option>
-                                        <option>Size LG</option>
-                                        <option>Size XL</option>
-                                    </select>
-                                </div>
-                                <div class="col-xs-4">
-                                    <input class="form-control" value="4" id="quant-input">
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+
                     <!-- end:Order row -->
                     <div class="widget-delivery clearfix">
-                        <form>
-                            <div class="col-xs-6 col-sm-12 col-md-6 col-lg-6 b-t-0">
-                                <label class="custom-control custom-radio">
-                                    <input id="radio4" name="radio" type="radio" class="custom-control-input" checked=""> <span class="custom-control-indicator"></span> <span class="custom-control-description">Delivery</span>
-                                </label>
-                            </div>
-                            <div class="col-xs-6 col-sm-12 col-md-6 col-lg-6 b-t-0">
-                                <label class="custom-control custom-radio">
-                                    <input id="radio3" name="radio" type="radio" class="custom-control-input"> <span class="custom-control-indicator"></span> <span class="custom-control-description">Takeout</span>
-                                </label>
-                            </div>
-                        </form>
+                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 b-t-0">
+                            <md-switch ng-model="hemenmi" aria-label="Switch 1">
+                                <div ng-show="hemenmi" class="label">
+                                    Hemen(~{{data.OrtalamaSiparisSuresi}} dk.)
+                                </div>
+                                <div ng-show="!hemenmi" class="label">
+                                    İleri Tarih
+                                </div>
+                            </md-switch>
+                        </div>
+                        <div ng-if="!hemenmi" class="col-xs-12 col-sm-12 col-md-12 col-lg-12 b-t-0">
+                            dtpicker
+                        </div>
                     </div>
                     <div class="widget-body">
                         <div class="price-wrap text-xs-center">
-                            <p>TOTAL</p>
-                            <h3 class="value"><strong>$ 25,49</strong></h3>
-                            <p>Free Shipping</p>
-                            <button onclick="location.href='checkout.html'" type="button" class="btn theme-btn btn-lg">Checkout</button>
+                            <p>Toplam</p>
+                            <h3 class="value"><strong>{{sepettutari}} ₺</strong></h3>
+                            <div ng-if="sepettutari<minimumsiparistutari">
+                                <span class="text text-danger">Sipaiş verebilmeniz için sepetinize {{minimumsiparistutari-sepettutari}}₺ kadar ürün eklemelisiniz</span>
+                            </div>
+                            <input type="button" ng-show="sepettutari>=minimumsiparistutari" class="btn theme-btn btn-lg" value="Sipariş Ver" />
                         </div>
                     </div>
                 </div>

@@ -4,6 +4,7 @@ using System.Web.Mvc;
 using ST.Models.ViewModels;
 using ST.BLL.Settings;
 using System.Collections.Generic;
+using Microsoft.AspNet.Identity;
 
 namespace ST.UI.MVC.Controllers
 {
@@ -101,6 +102,18 @@ namespace ST.UI.MVC.Controllers
                 data = firmaUrunModel
             };
             return Json(data, JsonRequestBehavior.AllowGet);
+        }
+        public JsonResult OdemeTipleriniGetir()
+        {
+            var data = new OdemeTipiRepo().GetAll().Select(x => new { x.Id, x.OdemeTipiAdi }).ToList();
+            return Json(data, JsonRequestBehavior.AllowGet);
+        }
+        [Authorize]
+        [HttpPost]
+        public JsonResult SepetiOnayla(SepetViewModel model)
+        {
+            string musteriid = HttpContext.User.Identity.GetUserId();
+            return Json(model, JsonRequestBehavior.AllowGet);
         }
     }
 }

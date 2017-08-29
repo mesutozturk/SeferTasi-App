@@ -17,6 +17,8 @@ namespace ST.Models.Entities
         public DateTime? OnaylanmaZamani { get; set; }
         [Display(Name = "Teslim Zamanı")]
         public DateTime? TeslimZamani { get; set; }
+        [Display(Name = "Istenilen Zaman")]
+        public DateTime? IstenilenZaman { get; set; }
         public byte? Puan { get; set; }
         public int OdemeTipiId { get; set; }
         public string KullaniciId { get; set; }

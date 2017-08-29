@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
 namespace ST.Models.ViewModels
 {
@@ -23,7 +19,7 @@ namespace ST.Models.ViewModels
         public string KategoriAciklama { get; set; }
         public decimal Fiyat { get; set; }
         public string FiyatGorunum { get; set; }
-
+        public int Adet { get; set; } = 1;
         public string UrunResimPath { get; set; }
     }
 }
