@@ -108,7 +108,6 @@ namespace ST.UI.MVC.Controllers
             var data = new OdemeTipiRepo().GetAll().Select(x => new { x.Id, x.OdemeTipiAdi }).ToList();
             return Json(data, JsonRequestBehavior.AllowGet);
         }
-        [Authorize]
         [HttpPost]
         public JsonResult SepetiOnayla(SepetViewModel model)
         {

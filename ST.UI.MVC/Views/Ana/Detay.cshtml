@@ -121,7 +121,18 @@
                             </md-switch>
                         </div>
                         <div ng-if="!hemenmi" class="col-xs-12 col-sm-12 col-md-12 col-lg-12 b-t-0">
-                            dtpicker
+                            <input type="date" ng-model="zaman.tarih" class="form-control" /><br />
+                            <input type="time" ng-model="zaman.saat" class="form-control" />
+                        </div>
+                        <div ng-show="sepettutari>=minimumsiparistutari" class="col-xs-12 col-sm-12 col-md-12 col-lg-12 b-t-0">
+                            <md-input-container class="md-block" flex-gt-sm>
+                                <label>Ödeme Tipi</label>
+                                <md-select ng-model="odemetipi">
+                                    <md-option ng-repeat="tip in odemetipleri" value="{{tip.Id}}" >
+                                        {{tip.OdemeTipiAdi}}
+                                    </md-option>
+                                </md-select>
+                            </md-input-container>
                         </div>
                     </div>
                     <div class="widget-body">
@@ -131,7 +142,7 @@
                             <div ng-if="sepettutari<minimumsiparistutari">
                                 <span class="text text-danger">Sipaiş verebilmeniz için sepetinize {{minimumsiparistutari-sepettutari}}₺ kadar ürün eklemelisiniz</span>
                             </div>
-                            <input type="button" ng-show="sepettutari>=minimumsiparistutari" class="btn theme-btn btn-lg" value="Sipariş Ver" />
+                            <input type="button" ng-show="sepettutari>=minimumsiparistutari" class="btn theme-btn btn-lg" value="Sipariş Ver" ng-click="sepetionayla()" />
                         </div>
                     </div>
                 </div>

@@ -14,6 +14,25 @@ app.factory("api", function ($http, $location) {
             }).then(function (response) {
                 success(response.data);
             });
+        },
+        sepetionayla: function (model, success) {
+            $http({
+                url: baseUrl + '/Ana/SepetiOnayla',
+                data: model,
+                method: 'POST',
+                dataType: 'JSON'
+            }).then(function (response) {
+                success(response.data);
+            });
+        },
+        odemetipigetir: function (success) {
+            $http({
+                url: baseUrl + '/Ana/OdemeTipleriniGetir/',
+                method: 'GET',
+                dataType: 'JSON'
+            }).then(function (response) {
+                success(response.data);
+            });
         }
     }
 
@@ -25,11 +44,20 @@ app.controller("SepetCtrl", function ($scope, api) {
     $scope.minimumsiparistutari = 0;
     $scope.sepettutari = 0;
     $scope.hemenmi = true;
+    $scope.zaman = {
+        tarih: new Date(),
+        saat: new Date()
+    };
+    $scope.odemetipleri = [];
+    $scope.odemetipi = {};
     function init() {
         api.firmaninurunlerinigetir($scope.firmaid, function (response) {
             console.log(response.data);
             $scope.data = response.data;
             $scope.minimumsiparistutari = response.data.MinimumSiparisTutari;
+        });
+        api.odemetipigetir(function (response) {
+            $scope.odemetipleri = response;
         });
     }
     $scope.sepeteekle = function (urun) {
@@ -71,6 +99,23 @@ app.controller("SepetCtrl", function ($scope, api) {
             }
         }
         sepetiHesapla();
+    }
+    $scope.sepetionayla = function () {
+        var model = {
+            FirmaId: $scope.data.Id,
+            SiparisTarihi: new Date(),
+            OdemeTipiId:$scope.odemetipi,
+            Urunler: $scope.sepet
+        };
+        if ($scope.hemenmi) {
+            model.IstenilenTarih = new Date(date.getTime() + $scope.data.OrtalamaSiparisSuresi * 60000);
+        } else {
+            var dd = new Date($scope.zaman.tarih.getFullYear(), $scope.zaman.tarih.getMonth(), $scope.zaman.tarih.getDate(), $scope.zaman.saat.getHours(), $scope.zaman.saat.getMinutes());
+            model.IstenilenTarih = dd;
+        }
+        api.sepetionayla(model, function (response) {
+            console.log(response);
+        });
     }
     setTimeout(function () {
         init();
