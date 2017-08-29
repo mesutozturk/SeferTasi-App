@@ -22,7 +22,7 @@ namespace ST.Models.Entities
         public byte? Puan { get; set; }
         public int OdemeTipiId { get; set; }
         public string KullaniciId { get; set; }
-        public int AdresId { get; set; }
+        public int? AdresId { get; set; }
         public int FirmaId { get; set; }
 
         [ForeignKey("OdemeTipiId")]

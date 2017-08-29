@@ -109,10 +109,12 @@ namespace ST.UI.MVC.Controllers
             return Json(data, JsonRequestBehavior.AllowGet);
         }
         [HttpPost]
-        public JsonResult SepetiOnayla(SepetViewModel model)
+        [Authorize]
+        public ActionResult SepetiOnayla(SepetViewModel model)
         {
-            string musteriid = HttpContext.User.Identity.GetUserId();
-            return Json(model, JsonRequestBehavior.AllowGet);
+            model.KullaniciId = HttpContext.User.Identity.GetUserId();
+            new SiparisRepo().Insert(model);
+            return RedirectToAction("Profilim", "Hesap");
         }
     }
 }

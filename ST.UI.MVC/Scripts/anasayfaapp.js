@@ -50,6 +50,7 @@ app.controller("SepetCtrl", function ($scope, api) {
     };
     $scope.odemetipleri = [];
     $scope.odemetipi = {};
+    $scope.KullaniciId = 0;
     function init() {
         api.firmaninurunlerinigetir($scope.firmaid, function (response) {
             console.log(response.data);
@@ -108,7 +109,7 @@ app.controller("SepetCtrl", function ($scope, api) {
             Urunler: $scope.sepet
         };
         if ($scope.hemenmi) {
-            model.IstenilenTarih = new Date(date.getTime() + $scope.data.OrtalamaSiparisSuresi * 60000);
+            model.IstenilenTarih = new Date(new Date().getTime() + $scope.data.OrtalamaSiparisSuresi * 60000);
         } else {
             var dd = new Date($scope.zaman.tarih.getFullYear(), $scope.zaman.tarih.getMonth(), $scope.zaman.tarih.getDate(), $scope.zaman.saat.getHours(), $scope.zaman.saat.getMinutes());
             model.IstenilenTarih = dd;
